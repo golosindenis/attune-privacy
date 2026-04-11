@@ -1,130 +1,1086 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Attune — Privacy Policy</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0d0c; color: #d4c4bc; line-height: 1.7; padding: 32px 20px 80px; }
-    .container { max-width: 720px; margin: 0 auto; }
-    .logo { font-size: 22px; font-weight: 700; color: #e8315b; letter-spacing: -0.5px; margin-bottom: 8px; }
-    .updated { font-size: 12px; color: #6a5a55; margin-bottom: 40px; }
-    h1 { font-size: 28px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
-    h2 { font-size: 16px; font-weight: 700; color: #ffffff; margin: 36px 0 10px; text-transform: uppercase; letter-spacing: 1px; }
-    p { font-size: 14px; color: #d4c4bc; margin-bottom: 12px; }
-    ul { padding-left: 20px; margin-bottom: 12px; }
-    li { font-size: 14px; color: #d4c4bc; margin-bottom: 6px; }
-    a { color: #e8315b; }
-    .warning { background: rgba(224,92,107,0.1); border: 1px solid rgba(224,92,107,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
-    .warning p { color: #e05c6b; margin: 0; font-size: 13px; }
-    .divider { height: 1px; background: #3a2e2a; margin: 8px 0; }
-    .footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid #3a2e2a; font-size: 12px; color: #6a5a55; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attune — Hormone-Intelligent Fitness for Women 35+</title>
+<meta name="description" content="The first fitness app that adapts to your hormones, not the other way around. AI-powered workouts, nutrition, and cycle tracking designed specifically for women 35+.">
+<meta property="og:title" content="Attune — Hormone-Intelligent Fitness">
+<meta property="og:description" content="Train with your cycle, not against it. AI workouts and nutrition that adapt to your hormones every day.">
+<meta property="og:image" content="https://bnyaknuibngvikfktecq.supabase.co/storage/v1/object/public/Presentation%20photos/screen-home.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #FF4D6A;
+  --pink-soft: #FF6B83;
+  --gold: #C9A96E;
+  --bg: #07050A;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0EBF4;
+  --muted: #7A6E80;
+  --glow: rgba(255,77,106,0.15);
+  --menstrual: #FF4D6A;
+  --follicular: #00E5A0;
+  --ovulatory: #FFB347;
+  --luteal: #E87AAB;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Grain */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Cursor */
+.cursor { width: 8px; height: 8px; background: var(--pink); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.1s; }
+.cursor-ring { width: 32px; height: 32px; border: 1px solid rgba(255,77,106,0.4); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: transform 0.15s; }
+
+/* Nav */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+  background: rgba(7,5,10,0);
+  transition: background 0.4s, backdrop-filter 0.4s;
+}
+nav.scrolled {
+  background: rgba(7,5,10,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 5px;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--pink); }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--pink);
+  color: #fff !important;
+  padding: 10px 22px;
+  border-radius: 24px;
+  font-size: 13px !important;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: opacity 0.2s !important;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* Sections */
+section { position: relative; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 140px 24px 80px;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255,77,106,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,169,110,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 80% 60%, rgba(0,229,160,0.04) 0%, transparent 50%);
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--pink);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  padding: 8px 18px;
+  border: 1px solid rgba(255,77,106,0.25);
+  border-radius: 24px;
+  background: rgba(255,77,106,0.06);
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(54px, 7vw, 100px);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -1px;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s forwards;
+}
+.hero-title em { font-style: italic; color: var(--pink); }
+.hero-title .gold { color: var(--gold); }
+
+.hero-sub {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--muted);
+  font-weight: 300;
+  max-width: 560px;
+  margin: 0 auto 44px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.6s forwards;
+}
+.hero-sub strong { color: var(--text); font-weight: 400; }
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 80px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s forwards;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--pink);
+  color: #fff;
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 8px 32px rgba(255,77,106,0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,77,106,0.4); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--text);
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 400;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+
+/* Phone mockups */
+.hero-phones {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 20px;
+  opacity: 0;
+  animation: fadeUp 1s 1s forwards;
+}
+
+.phone {
+  background: linear-gradient(145deg, #1C1C1E, #0D0D0F);
+  border-radius: 44px;
+  padding: 10px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.1),
+    0 60px 120px rgba(0,0,0,0.9),
+    0 0 80px rgba(255,77,106,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  position: relative;
+  flex-shrink: 0;
+}
+.phone-island {
+  width: 80px; height: 26px;
+  background: #000;
+  border-radius: 13px;
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.phone-screen {
+  width: 100%; height: 100%;
+  border-radius: 36px;
+  overflow: hidden;
+  background: #0D0D0F;
+}
+.phone-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.phone-glow {
+  position: absolute;
+  bottom: -20px; left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 60px;
+  background: var(--pink);
+  filter: blur(30px);
+  opacity: 0.15;
+  border-radius: 50%;
+}
+
+.phone-side {
+  width: 180px; height: 368px;
+  transform: rotateY(-8deg) rotateX(3deg) translateY(20px);
+  transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.phone-side:hover { transform: rotateY(-2deg) rotateX(1deg) translateY(16px); }
+
+.phone-center {
+  width: 210px; height: 430px;
+  transform: rotateY(0deg) rotateX(3deg);
+  transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+  z-index: 2;
+}
+.phone-center:hover { transform: rotateY(0deg) rotateX(1deg) scale(1.02); }
+
+.phone-right {
+  width: 180px; height: 368px;
+  transform: rotateY(8deg) rotateX(3deg) translateY(20px);
+  transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.phone-right:hover { transform: rotateY(2deg) rotateX(1deg) translateY(16px); }
+
+/* Divider */
+.divider-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0 48px;
+}
+
+/* PROBLEM */
+.problem {
+  padding: 140px 24px;
+  text-align: center;
+}
+.problem-inner { max-width: 900px; margin: 0 auto; }
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--pink);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+.section-title em { font-style: italic; color: var(--pink); }
+
+.section-body {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--muted);
+  font-weight: 300;
+  max-width: 620px;
+  margin: 0 auto 60px;
+}
+.section-body strong { color: var(--text); font-weight: 400; }
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  text-align: left;
+}
+
+.pain-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  transition: border-color 0.3s, background 0.3s;
+}
+.pain-card:hover { border-color: rgba(255,77,106,0.2); background: rgba(255,77,106,0.03); }
+.pain-emoji { font-size: 28px; margin-bottom: 14px; }
+.pain-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+.pain-desc { font-size: 13px; line-height: 1.7; color: var(--muted); font-weight: 300; }
+
+/* HOW IT WORKS */
+.how {
+  padding: 140px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.how-header { text-align: center; margin-bottom: 80px; }
+
+.phases-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 80px;
+}
+
+.phase-card {
+  border-radius: 20px;
+  padding: 28px 20px;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: transform 0.3s;
+}
+.phase-card:hover { transform: translateY(-4px); }
+
+.phase-menstrual { background: rgba(255,77,106,0.06); border-color: rgba(255,77,106,0.15); }
+.phase-follicular { background: rgba(0,229,160,0.06); border-color: rgba(0,229,160,0.15); }
+.phase-ovulatory { background: rgba(255,179,71,0.06); border-color: rgba(255,179,71,0.15); }
+.phase-luteal { background: rgba(232,122,171,0.06); border-color: rgba(232,122,171,0.15); }
+
+.phase-emoji { font-size: 32px; margin-bottom: 12px; }
+.phase-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.phase-days { font-size: 11px; color: var(--muted); margin-bottom: 12px; letter-spacing: 0.5px; }
+.phase-desc { font-size: 12px; line-height: 1.6; color: var(--muted); font-weight: 300; }
+
+.phase-menstrual .phase-name { color: var(--menstrual); }
+.phase-follicular .phase-name { color: var(--follicular); }
+.phase-ovulatory .phase-name { color: var(--ovulatory); }
+.phase-luteal .phase-name { color: var(--luteal); }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.step-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.step-card:hover { border-color: rgba(255,77,106,0.2); }
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--pink), transparent);
+}
+
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px;
+  font-weight: 300;
+  color: rgba(255,77,106,0.12);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.step-title { font-size: 18px; font-weight: 500; margin-bottom: 10px; }
+.step-desc { font-size: 14px; line-height: 1.7; color: var(--muted); font-weight: 300; }
+
+/* FEATURES */
+.features { padding: 140px 24px; }
+.features-inner { max-width: 1100px; margin: 0 auto; }
+.features-header { text-align: center; margin-bottom: 80px; }
+
+.feature-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 120px;
+}
+.feature-row.reverse { direction: rtl; }
+.feature-row.reverse > * { direction: ltr; }
+
+.feature-phone-wrap {
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.feature-phone {
+  width: 240px; height: 490px;
+  background: linear-gradient(145deg, #1C1C1E, #0D0D0F);
+  border-radius: 44px;
+  padding: 10px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.1),
+    0 40px 80px rgba(0,0,0,0.8),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  position: relative;
+  transform: rotateY(-6deg) rotateX(2deg);
+  transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.feature-phone:hover { transform: rotateY(-1deg) rotateX(1deg); }
+.feature-phone .phone-island { width: 80px; height: 26px; background: #000; border-radius: 13px; position: absolute; top: 18px; left: 50%; transform: translateX(-50%); z-index: 2; }
+.feature-phone .phone-screen { width: 100%; height: 100%; border-radius: 36px; overflow: hidden; background: #0D0D0F; }
+.feature-phone .phone-screen img { width: 100%; height: 100%; object-fit: cover; }
+
+.feature-reverse-phone { transform: rotateY(6deg) rotateX(2deg); }
+.feature-reverse-phone:hover { transform: rotateY(1deg) rotateX(1deg); }
+
+.feature-content { padding: 20px 0; }
+.feature-tag {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  color: var(--pink);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255,77,106,0.2);
+  border-radius: 20px;
+  background: rgba(255,77,106,0.06);
+}
+.feature-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+.feature-title em { font-style: italic; color: var(--pink); }
+.feature-desc { font-size: 15px; line-height: 1.8; color: var(--muted); font-weight: 300; margin-bottom: 28px; }
+.feature-desc strong { color: var(--text); font-weight: 400; }
+
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 300;
+}
+.feature-list li::before {
+  content: '';
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: rgba(255,77,106,0.15);
+  border: 1px solid rgba(255,77,106,0.3);
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("data:image/svg+xml,%3Csvg width='8' height='6' viewBox='0 0 8 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3L3 5L7 1' stroke='%23FF4D6A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* CONDITIONS */
+.conditions {
+  padding: 140px 24px;
+  background: linear-gradient(180deg, transparent, rgba(255,77,106,0.02), transparent);
+}
+.conditions-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+
+.conditions-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.condition-pill {
+  padding: 10px 18px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 300;
+  transition: all 0.3s;
+  cursor: default;
+}
+.condition-pill:hover {
+  border-color: rgba(255,77,106,0.3);
+  color: var(--text);
+  background: rgba(255,77,106,0.05);
+}
+.condition-pill.highlight {
+  border-color: rgba(255,77,106,0.25);
+  color: var(--pink);
+  background: rgba(255,77,106,0.07);
+}
+
+/* TESTIMONIAL */
+.testimonial {
+  padding: 120px 24px;
+  text-align: center;
+}
+.testimonial-inner { max-width: 700px; margin: 0 auto; }
+.quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 120px;
+  color: rgba(255,77,106,0.12);
+  line-height: 0.5;
+  margin-bottom: 32px;
+}
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--text);
+  margin-bottom: 32px;
+}
+.quote-attr { font-size: 13px; color: var(--muted); letter-spacing: 1px; }
+
+/* PRICING */
+.pricing { padding: 140px 24px; text-align: center; }
+.pricing-inner { max-width: 900px; margin: 0 auto; }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 60px;
+  text-align: left;
+}
+
+.price-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 36px 28px;
+  transition: border-color 0.3s;
+}
+.price-card:hover { border-color: rgba(255,255,255,0.14); }
+.price-card.featured {
+  border-color: rgba(255,77,106,0.3);
+  background: rgba(255,77,106,0.05);
+  position: relative;
+  overflow: hidden;
+}
+.price-card.featured::before {
+  content: 'BEST VALUE';
+  position: absolute;
+  top: 16px; right: 16px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--pink);
+  background: rgba(255,77,106,0.12);
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,77,106,0.2);
+}
+.price-name { font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 16px; }
+.price-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.price-amount span { font-size: 20px; color: var(--muted); vertical-align: top; margin-top: 10px; display: inline-block; }
+.price-period { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+.price-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+.price-desc { font-size: 13px; line-height: 1.7; color: var(--muted); font-weight: 300; }
+
+/* CTA */
+.cta-section {
+  padding: 160px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(255,77,106,0.06) 0%, transparent 70%);
+}
+.cta-inner { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+.cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 6vw, 86px);
+  font-weight: 300;
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+.cta-title em { font-style: italic; color: var(--pink); }
+.cta-sub { font-size: 17px; color: var(--muted); line-height: 1.7; margin-bottom: 44px; font-weight: 300; }
+.app-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--text);
+  color: #000;
+  padding: 14px 28px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.app-badge:hover { opacity: 0.9; transform: translateY(-2px); }
+.app-badge-sub { font-size: 10px; font-weight: 400; color: rgba(0,0,0,0.6); letter-spacing: 0.5px; }
+.app-badge-main { font-size: 17px; font-weight: 600; }
+
+/* Footer */
+footer {
+  padding: 48px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 4px;
+  color: var(--text);
+  opacity: 0.6;
+  text-decoration: none;
+}
+.footer-logo span { color: var(--pink); }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); }
+.footer-copy { font-size: 12px; color: var(--muted); opacity: 0.5; }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+  .hero-phones .phone-side { display: none; }
+  .phone-center { width: 180px; height: 368px; }
+  .pain-grid { grid-template-columns: 1fr; }
+  .phases-row { grid-template-columns: repeat(2, 1fr); }
+  .steps-grid { grid-template-columns: 1fr; }
+  .feature-row { grid-template-columns: 1fr; gap: 40px; }
+  .feature-row.reverse { direction: ltr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; align-items: flex-start; padding: 36px 24px; }
+}
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">Attune</div>
-    <h1>Privacy Policy</h1>
-    <div class="updated">Last updated: April 6, 2026</div>
 
-    <p>Attune is a hormone-intelligent health and fitness app designed for women 35 and older. This Privacy Policy explains what data we collect, how we use it, who we share it with, and your rights regarding that data. Please read it carefully before using the app.</p>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-    <div class="warning">
-      <p>Attune processes sensitive health data including menstrual cycle information, body photographs, and blood work results. By using the app you consent to the collection and processing of this data as described in this policy.</p>
+<nav id="nav">
+  <a href="#" class="nav-logo">ATT<span>U</span>NE</a>
+  <div class="nav-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="https://apps.apple.com/app/id6761509262" class="nav-cta" target="_blank">Download Free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">✦ Now available on the App Store</div>
+    <h1 class="hero-title">
+      Train with your<br>hormones, not<br><em>against them.</em>
+    </h1>
+    <p class="hero-sub">
+      The first fitness app that actually understands the female body. <strong>AI-powered workouts, nutrition, and cycle tracking</strong> designed exclusively for women 35+.
+    </p>
+    <div class="hero-actions">
+      <a href="https://apps.apple.com/app/id6761509262" class="btn-primary" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on App Store
+      </a>
+      <a href="#how-it-works" class="btn-secondary">
+        See how it works →
+      </a>
     </div>
 
-    <h2>1. Information We Collect</h2>
-    <p>We collect the following types of information when you use Attune:</p>
-    <ul>
-      <li><strong>Account data:</strong> email address, name, date of birth, and profile details you provide during signup.</li>
-      <li><strong>Health and fitness data:</strong> menstrual cycle dates, cycle length, period length, workout logs, exercise weights and reps, daily readiness check-in responses, body measurements, weight, height, dietary preferences, intolerances, and health goals.</li>
-      <li><strong>Body photographs:</strong> progress photos you choose to upload for AI-powered body composition analysis. These are stored securely and are never shared with third parties except as described in section 4.</li>
-      <li><strong>Blood work data:</strong> photographs of laboratory results you choose to upload for AI-powered biomarker interpretation. This is sensitive medical data and is treated with the highest level of care. It is never shared with third parties except as described in section 4.</li>
-      <li><strong>Meal and nutrition data:</strong> meal plans generated for you and any dietary information you provide.</li>
-      <li><strong>Usage data:</strong> app interactions and feature usage collected through analytics services to help us improve the app.</li>
-      <li><strong>Purchase data:</strong> subscription status and purchase history managed through RevenueCat. We do not store your payment card details at any point.</li>
-    </ul>
-
-    <h2>2. How We Use Your Information</h2>
-    <ul>
-      <li>To generate personalised AI-powered workout plans tailored to your cycle phase, readiness score, and body composition.</li>
-      <li>To generate personalised AI-powered meal plans based on your profile, dietary preferences, and hormonal phase.</li>
-      <li>To analyse body photographs and provide body composition insights that inform your workout programming.</li>
-      <li>To analyse blood work photographs and provide educational biomarker interpretation to support your health awareness.</li>
-      <li>To provide cycle phase tracking, daily readiness scoring, and AI-generated health insights.</li>
-      <li>To manage your subscription and process payments through RevenueCat.</li>
-      <li>To understand how the app is used through anonymised analytics so we can improve features.</li>
-      <li>To send you important notifications about your account or the app where you have consented.</li>
-    </ul>
-    <p>We do not sell your personal data to any third party. We do not use your data for advertising purposes.</p>
-
-    <h2>3. AI Processing of Sensitive Health Data</h2>
-    <p>Attune uses artificial intelligence to analyse body photographs and blood work results. This processing is performed by Anthropic's Claude AI models via a secure API connection. When you submit a photograph for analysis:</p>
-    <ul>
-      <li>The image is transmitted securely to Anthropic's API for processing.</li>
-      <li>Anthropic processes the image to generate an analysis response.</li>
-      <li>The analysis result is stored in your Attune account.</li>
-      <li>Your images and analysis results are not used to train AI models.</li>
-    </ul>
-    <div class="warning">
-      <p>AI analysis of body photographs and blood work results is for educational and wellness purposes only. It is not a medical diagnosis, does not constitute medical advice, and should never replace consultation with a qualified healthcare professional. Always consult your doctor before making health decisions based on AI-generated insights.</p>
-    </div>
-
-    <h2>4. Third-Party Services</h2>
-    <p>Attune uses the following third-party services. Each has its own privacy policy and data practices:</p>
-    <ul>
-      <li><strong>Supabase</strong> — database, file storage, and authentication. Your data is stored in the Asia Pacific region (Seoul, South Korea). <a href="https://supabase.com/privacy">supabase.com/privacy</a></li>
-      <li><strong>Anthropic</strong> — AI language model provider used for body photo analysis, blood work interpretation, workout plan generation, meal plan generation, and exercise instructions. Body photographs and blood work images are transmitted to Anthropic for processing. <a href="https://www.anthropic.com/privacy">anthropic.com/privacy</a></li>
-      <li><strong>RevenueCat</strong> — subscription and in-app purchase management. Handles all payment processing. <a href="https://www.revenuecat.com/privacy">revenuecat.com/privacy</a></li>
-      <li><strong>Amplitude</strong> — anonymised usage analytics to understand how the app is used. No personally identifiable health data is shared with Amplitude. <a href="https://amplitude.com/privacy">amplitude.com/privacy</a></li>
-      <li><strong>PostHog</strong> — product analytics and event tracking to understand feature usage. No personally identifiable health data is shared with PostHog. <a href="https://posthog.com/privacy">posthog.com/privacy</a></li>
-      <li><strong>USDA FoodData Central</strong> — nutritional data API used for the Dining Out Advisor feature. Your restaurant queries are sent to the USDA API. No personal health data is shared. <a href="https://fdc.nal.usda.gov/privacy-policy">fdc.nal.usda.gov/privacy-policy</a></li>
-    </ul>
-
-    <h2>5. Body Photographs and Blood Work Images</h2>
-    <p>Photographs you upload are stored in encrypted cloud storage provided by Supabase. Access is restricted to your account only. We apply the following protections:</p>
-    <ul>
-      <li>Images are stored with access controls that prevent any other user from viewing your photos.</li>
-      <li>Images are transmitted over encrypted connections at all times.</li>
-      <li>Images are shared only with Anthropic for the purpose of generating your requested analysis.</li>
-      <li>Images are not used for any marketing, advertising, or model training purpose.</li>
-      <li>You can request deletion of all photographs and associated analysis data at any time.</li>
-    </ul>
-
-    <h2>6. Data Storage and Security</h2>
-    <p>Your data is stored using Supabase infrastructure hosted in the Asia Pacific region in Seoul, South Korea. We use industry-standard encryption for data in transit (TLS) and at rest. Access to your data is controlled through authentication tokens and row-level security policies that ensure only you can access your personal information.</p>
-
-    <h2>7. Data Retention</h2>
-    <p>We retain your data for as long as your account remains active. If you delete your account, we will delete your personal data, health data, photographs, and analysis results within 30 days. Some anonymised usage data may be retained in analytics systems for a longer period as it cannot be linked back to you.</p>
-
-    <h2>8. Your Rights</h2>
-    <p>You have the following rights regarding your personal data:</p>
-    <ul>
-      <li><strong>Access:</strong> you can request a copy of the personal data we hold about you.</li>
-      <li><strong>Correction:</strong> you can update your profile data directly in the app at any time.</li>
-      <li><strong>Deletion:</strong> you can delete your account and all associated data through the app or by contacting us.</li>
-      <li><strong>Portability:</strong> you can request an export of your data in a structured format.</li>
-      <li><strong>Objection:</strong> you can object to certain types of processing including analytics tracking.</li>
-    </ul>
-    <p>If you are located in the European Economic Area, United Kingdom, or a jurisdiction with similar data protection laws, you have additional rights under applicable legislation including the right to lodge a complaint with a supervisory authority.</p>
-
-    <h2>9. Children's Privacy</h2>
-    <p>Attune is not intended for use by anyone under the age of 18. We do not knowingly collect personal information from minors. If you believe a minor has created an account, please contact us immediately and we will delete the account and associated data.</p>
-
-    <h2>10. International Data Transfers</h2>
-    <p>Attune is operated from the United Arab Emirates. Your data may be processed by third-party services located in the United States and other countries. By using Attune you consent to the transfer of your data to these countries, which may have different data protection laws than your country of residence.</p>
-
-    <h2>11. Changes to This Policy</h2>
-    <p>We may update this Privacy Policy from time to time. When we make significant changes we will notify you through the app or by email before the changes take effect. The date at the top of this page indicates when the policy was last updated. Continued use of the app after changes are made constitutes acceptance of the updated policy.</p>
-
-    <h2>12. Contact Us</h2>
-    <p>If you have any questions about this Privacy Policy, want to exercise your data rights, or need to report a privacy concern, please contact us at:</p>
-    <p><a href="mailto:hello@attuneapp.io">hello@attuneapp.io</a></p>
-
-    <div class="footer">
-      <p>© 2026 Attune. All rights reserved.</p>
+    <div class="hero-phones">
+      <div class="phone phone-side">
+        <div class="phone-island"></div>
+        <div class="phone-screen">
+          <img src="https://bnyaknuibngvikfktecq.supabase.co/storage/v1/object/public/Presentation%20photos/screen-checkin.png" alt="Daily Check-in">
+        </div>
+      </div>
+      <div class="phone phone-center">
+        <div class="phone-island"></div>
+        <div class="phone-screen">
+          <img src="https://bnyaknuibngvikfktecq.supabase.co/storage/v1/object/public/Presentation%20photos/screen-home.png" alt="Home Screen">
+        </div>
+        <div class="phone-glow"></div>
+      </div>
+      <div class="phone phone-right">
+        <div class="phone-island"></div>
+        <div class="phone-screen">
+          <img src="https://bnyaknuibngvikfktecq.supabase.co/storage/v1/object/public/Presentation%20photos/screen-cycle.png" alt="Cycle Tracker">
+        </div>
+      </div>
     </div>
   </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="problem-inner">
+    <span class="eyebrow reveal">The problem</span>
+    <h2 class="section-title reveal reveal-delay-1">Most fitness apps were built<br>for <em>someone else.</em></h2>
+    <p class="section-body reveal reveal-delay-2">
+      Every app tells you to eat less and train harder. But after 35, your hormones change everything. <strong>What works in week one may not work in week three.</strong> Your body is not broken. It just needs a different approach.
+    </p>
+    <div class="pain-grid">
+      <div class="pain-card reveal reveal-delay-1">
+        <div class="pain-emoji">😔</div>
+        <div class="pain-title">Doing everything right, seeing no results</div>
+        <div class="pain-desc">Eating clean, training consistently, and still not losing weight. Your hormones, not your effort, are the missing variable.</div>
+      </div>
+      <div class="pain-card reveal reveal-delay-2">
+        <div class="pain-emoji">⚡</div>
+        <div class="pain-title">Energy that makes no sense</div>
+        <div class="pain-desc">Some weeks you can train hard. Others, the same workout feels impossible. That's your cycle — not inconsistency.</div>
+      </div>
+      <div class="pain-card reveal reveal-delay-3">
+        <div class="pain-emoji">🔄</div>
+        <div class="pain-title">Apps designed for a 25-year-old man</div>
+        <div class="pain-desc">Generic fitness advice is built on research that largely excluded women. Your biology is fundamentally different.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how-it-works">
+  <div class="how-header">
+    <span class="eyebrow reveal">How it works</span>
+    <h2 class="section-title reveal reveal-delay-1">Your cycle is your<br><em>superpower.</em></h2>
+    <p class="section-body reveal reveal-delay-2">
+      Attune reads where you are in your cycle every day and adjusts your workouts, nutrition, and recovery guidance accordingly. Four phases, four completely different approaches.
+    </p>
+  </div>
+
+  <div class="phases-row">
+    <div class="phase-card phase-menstrual reveal reveal-delay-1">
+      <div class="phase-emoji">🌑</div>
+      <div class="phase-name">Menstrual</div>
+      <div class="phase-days">DAYS 1 TO 5</div>
+      <div class="phase-desc">Gentle movement. Rest is the training. Iron-rich nutrition. Your body is asking for warmth and care.</div>
+    </div>
+    <div class="phase-card phase-follicular reveal reveal-delay-2">
+      <div class="phase-emoji">🌒</div>
+      <div class="phase-name">Follicular</div>
+      <div class="phase-days">DAYS 6 TO 13</div>
+      <div class="phase-desc">Rising energy. Build strength. Push harder. Your best window for new personal bests.</div>
+    </div>
+    <div class="phase-card phase-ovulatory reveal reveal-delay-3">
+      <div class="phase-emoji">🌕</div>
+      <div class="phase-name">Ovulatory</div>
+      <div class="phase-days">DAYS 14 TO 17</div>
+      <div class="phase-desc">Peak performance. Maximum intensity. You are at your strongest. Use it.</div>
+    </div>
+    <div class="phase-card phase-luteal reveal reveal-delay-4">
+      <div class="phase-emoji">🌖</div>
+      <div class="phase-name">Luteal</div>
+      <div class="phase-days">DAYS 18 TO 28</div>
+      <div class="phase-desc">Slowing down. Controlled effort. Higher calorie needs. Honour what your body needs.</div>
+    </div>
+  </div>
+
+  <div class="steps-grid">
+    <div class="step-card reveal reveal-delay-1">
+      <div class="step-num">01</div>
+      <div class="step-title">Tell us about you</div>
+      <div class="step-desc">Complete a comprehensive health profile including your cycle, any conditions like PCOS or thyroid issues, injuries, goals, and dietary preferences. The app adapts to all of it.</div>
+    </div>
+    <div class="step-card reveal reveal-delay-2">
+      <div class="step-num">02</div>
+      <div class="step-title">AI builds your programme</div>
+      <div class="step-desc">Claude AI generates a personalised workout and nutrition plan based on your exact profile, current cycle phase, readiness score, and health conditions. No two plans are the same.</div>
+    </div>
+    <div class="step-card reveal reveal-delay-3">
+      <div class="step-num">03</div>
+      <div class="step-title">It adapts every day</div>
+      <div class="step-desc">Check in each morning and your coach message, workout intensity, and nutrition focus update to match exactly where you are in your cycle and how your body feels today.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="features-inner">
+    <div class="features-header">
+      <span class="eyebrow reveal">Everything you need</span>
+      <h2 class="section-title reveal reveal-delay-1">Built around <em>your</em> biology</h2>
+    </div>
+
+    <!-- Feature 1 -->
+    <div class="feature-row">
+      <div class="feature-phone-wrap reveal reveal-delay-1">
+        <div class="feature-phone">
+          <div class="phone-island"></div>
+          <div class="phone-screen">
+            <img src="https://bnyaknuibngvikfktecq.supabase.co/storage/v1/object/public/Presentation%20photos/screen-home.png" alt="AI Coach">
+          </div>
+        </div>
+      </div>
+      <div class="feature-content reveal reveal-delay-2">
+        <div class="feature-tag">Daily Intelligence</div>
+        <h3 class="feature-title">Your AI coach<br>knows your <em>hormones</em></h3>
+        <p class="feature-desc">Every morning your personalised coach message, workout intensity, and nutrition focus update based on your cycle phase, sleep, stress, energy, and readiness. It is not generic advice. <strong>It is built for today, for you.</strong></p>
+        <ul class="feature-list">
+          <li>Readiness scoring based on your check-in data</li>
+          <li>Cycle-phase adapted training intensity</li>
+          <li>Warm, personal coach messages every day</li>
+          <li>Nutrition focus that changes with your hormones</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Feature 2 -->
+    <div class="feature-row reverse">
+      <div class="feature-phone-wrap reveal reveal-delay-1">
+        <div class="feature-phone feature-reverse-phone">
+          <div class="phone-island"></div>
+          <div class="phone-screen">
+            <img src="https://bnyaknuibngvikfktecq.supabase.co/storage/v1/object/public/Presentation%20photos/screen-train.png" alt="Workouts">
+          </div>
+        </div>
+      </div>
+      <div class="feature-content reveal reveal-delay-2">
+        <div class="feature-tag">Smart Training</div>
+        <h3 class="feature-title">Workouts that<br>work <em>for you</em></h3>
+        <p class="feature-desc">AI-generated strength programs with video demonstrations for every exercise. Your plan accounts for your experience level, available equipment, injuries, and health conditions. <strong>If you have a frozen shoulder, you will never be prescribed an overhead press.</strong></p>
+        <ul class="feature-list">
+          <li>2 to 6 day training splits tailored to your schedule</li>
+          <li>Video demonstrations for 60+ exercises</li>
+          <li>Injury-aware exercise selection</li>
+          <li>Progressive overload built in automatically</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Feature 3 -->
+    <div class="feature-row">
+      <div class="feature-phone-wrap reveal reveal-delay-1">
+        <div class="feature-phone">
+          <div class="phone-island"></div>
+          <div class="phone-screen">
+            <img src="https://bnyaknuibngvikfktecq.supabase.co/storage/v1/object/public/Presentation%20photos/screen-meals.png" alt="Nutrition">
+          </div>
+        </div>
+      </div>
+      <div class="feature-content reveal reveal-delay-2">
+        <div class="feature-tag">Hormone Nutrition</div>
+        <h3 class="feature-title">Meals that fuel<br>your <em>cycle</em></h3>
+        <p class="feature-desc">7-day meal plans with carb cycling built in. Your nutrition shifts with every phase — iron-rich during menstrual, energising during follicular, anti-inflammatory during ovulatory, magnesium-rich during luteal. <strong>Vegan, keto, paleo, Mediterranean — all fully supported.</strong></p>
+        <ul class="feature-list">
+          <li>Carb cycling automatically applied to training vs rest days</li>
+          <li>Full dietary approach support including vegan and keto</li>
+          <li>Allergy and food intolerance filtering</li>
+          <li>Weekly grocery list generated automatically</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- CONDITIONS -->
+<section class="conditions">
+  <div class="conditions-inner">
+    <span class="eyebrow reveal">Health conditions</span>
+    <h2 class="section-title reveal reveal-delay-1">The app that finally<br><em>understands</em> your condition</h2>
+    <p class="section-body reveal reveal-delay-2">
+      Attune is the only fitness app with built-in intelligence for the health conditions that affect women most. Your programme adapts specifically when you have any of these.
+    </p>
+    <div class="conditions-grid reveal reveal-delay-3">
+      <div class="condition-pill highlight">PCOS</div>
+      <div class="condition-pill highlight">Hashimoto's</div>
+      <div class="condition-pill highlight">Thyroid issues</div>
+      <div class="condition-pill highlight">Endometriosis</div>
+      <div class="condition-pill highlight">Insulin resistance</div>
+      <div class="condition-pill">Type 1 diabetes</div>
+      <div class="condition-pill">Type 2 diabetes</div>
+      <div class="condition-pill">High blood pressure</div>
+      <div class="condition-pill">Adrenal fatigue</div>
+      <div class="condition-pill">Fibromyalgia</div>
+      <div class="condition-pill">Osteoporosis</div>
+      <div class="condition-pill">Diastasis recti</div>
+      <div class="condition-pill">Rheumatoid arthritis</div>
+      <div class="condition-pill">Lupus</div>
+      <div class="condition-pill">Perimenopause</div>
+      <div class="condition-pill">Menopause</div>
+      <div class="condition-pill">Postpartum recovery</div>
+      <div class="condition-pill">Pregnancy</div>
+      <div class="condition-pill">Chronic fatigue</div>
+      <div class="condition-pill">Celiac disease</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="testimonial-inner reveal">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">For the first time in years I feel like my fitness programme is working with my body instead of fighting it. The fact that it knows I have PCOS and adapts everything around that — no other app has ever done that.</p>
+    <div class="quote-attr">EARLY ATTUNE USER — DUBAI</div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-inner">
+    <span class="eyebrow reveal">Simple pricing</span>
+    <h2 class="section-title reveal reveal-delay-1">Start free. <em>Stay when it works.</em></h2>
+    <p class="section-body reveal reveal-delay-2">7-day free trial on all plans. Cancel anytime. No hidden fees.</p>
+    <div class="pricing-grid">
+      <div class="price-card reveal reveal-delay-1">
+        <div class="price-name">Monthly</div>
+        <div class="price-amount"><span>$</span>24<span style="font-size:28px">.99</span></div>
+        <div class="price-period">per month</div>
+        <div class="price-divider"></div>
+        <div class="price-desc">Full access to all features. Best for trying the app before committing long term.</div>
+      </div>
+      <div class="price-card featured reveal reveal-delay-2">
+        <div class="price-name">Annual</div>
+        <div class="price-amount"><span>$</span>149<span style="font-size:28px">.99</span></div>
+        <div class="price-period">per year — saves 50%</div>
+        <div class="price-divider"></div>
+        <div class="price-desc">The most committed women choose annual. Highest results, lowest cost. Less than $13 per month.</div>
+      </div>
+      <div class="price-card reveal reveal-delay-3">
+        <div class="price-name">Quarterly</div>
+        <div class="price-amount"><span>$</span>49<span style="font-size:28px">.99</span></div>
+        <div class="price-period">per 3 months — saves 33%</div>
+        <div class="price-divider"></div>
+        <div class="price-desc">Perfect for committing to one full transformation programme before deciding long term.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <span class="eyebrow reveal">Start today</span>
+    <h2 class="cta-title reveal reveal-delay-1">Your hormones are<br>not the <em>problem.</em></h2>
+    <p class="cta-sub reveal reveal-delay-2">They have just never had the right programme. Download Attune and train in a way that finally makes sense for your body.</p>
+    <div class="reveal reveal-delay-3">
+      <a href="https://apps.apple.com/app/id6761509262" class="app-badge" target="_blank">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div>
+          <div class="app-badge-sub">DOWNLOAD ON THE</div>
+          <div class="app-badge-main">App Store</div>
+        </div>
+      </a>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:20px;" class="reveal reveal-delay-4">Free 7-day trial · No credit card required · Cancel anytime</p>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="footer-logo">ATT<span>U</span>NE</a>
+  <div class="footer-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="mailto:hello@attuneapp.io">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Attune. All rights reserved.</div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+function animRing() { rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animRing); }
+animRing();
+
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.15 });
+reveals.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
