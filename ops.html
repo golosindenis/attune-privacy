@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attune Ops</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0b;
+    --bg2: #111113;
+    --bg3: #18181b;
+    --bg4: #1f1f23;
+    --pink: #FF4D6A;
+    --green: #00E5A0;
+    --gold: #FFB347;
+    --purple: #E87AAB;
+    --blue: #4D9FFF;
+    --text: #f0ece8;
+    --muted: #6b6868;
+    --muted2: #4a4848;
+    --border: rgba(255,255,255,0.06);
+    --border2: rgba(255,255,255,0.10);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  /* PASSWORD GATE */
+  .gate {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .gate-box {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 20px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+  }
+
+  .gate-logo {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 8px;
+  }
+
+  .gate-title {
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 32px;
+    color: var(--text);
+  }
+
+  .gate input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 12px;
+  }
+
+  .gate input:focus { border-color: var(--pink); }
+
+  .gate button {
+    width: 100%;
+    background: var(--pink);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .gate button:hover { opacity: 0.85; }
+
+  .gate-error {
+    color: var(--pink);
+    font-size: 13px;
+    margin-top: 12px;
+    display: none;
+  }
+
+  /* DASHBOARD */
+  .dashboard { display: none; }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,11,0.95);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pink);
+  }
+
+  .topbar-sep { width: 1px; height: 20px; background: var(--border2); }
+
+  .topbar-title {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .refresh-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .refresh-btn:hover { color: var(--text); border-color: var(--border2); }
+
+  .last-updated {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted2);
+  }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* MAIN GRID */
+  .main {
+    padding: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* OVERVIEW ROW */
+  .overview-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .stat-card:hover { border-color: var(--border2); }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .stat-card.pink::before { background: var(--pink); }
+  .stat-card.green::before { background: var(--green); }
+  .stat-card.gold::before { background: var(--gold); }
+  .stat-card.blue::before { background: var(--blue); }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-value.pink { color: var(--pink); }
+  .stat-value.green { color: var(--green); }
+  .stat-value.gold { color: var(--gold); }
+  .stat-value.blue { color: var(--blue); }
+
+  .stat-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .stat-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 6px;
+    margin-top: 6px;
+  }
+
+  .stat-badge.up { background: rgba(0,229,160,0.12); color: var(--green); }
+  .stat-badge.neutral { background: rgba(255,255,255,0.06); color: var(--muted); }
+
+  /* PLATFORM GRID */
+  .platform-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  .panel {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .panel-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+
+  .panel-icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .panel-icon.supabase { background: rgba(0,229,160,0.12); }
+  .panel-icon.rc { background: rgba(255,77,106,0.12); }
+  .panel-icon.sentry { background: rgba(77,159,255,0.12); }
+
+  .panel-status {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    padding: 4px 10px;
+    background: var(--bg3);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .panel-body { padding: 20px 22px; }
+
+  .panel-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .panel-row:last-child { border-bottom: none; }
+
+  .panel-row-label {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .panel-row-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .panel-row-value.pink { color: var(--pink); }
+  .panel-row-value.green { color: var(--green); }
+  .panel-row-value.gold { color: var(--gold); }
+  .panel-row-value.blue { color: var(--blue); }
+
+  /* SENTRY ERRORS */
+  .error-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .error-item:last-child { border-bottom: none; }
+
+  .error-title {
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    color: var(--text);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .error-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .error-count {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: var(--pink);
+    background: rgba(255,77,106,0.10);
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+
+  .error-level {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  .error-time {
+    font-size: 11px;
+    color: var(--muted2);
+    margin-left: auto;
+  }
+
+  /* LOADING */
+  .skeleton {
+    background: linear-gradient(90deg, var(--bg3) 25%, var(--bg4) 50%, var(--bg3) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 6px;
+    height: 20px;
+    width: 60px;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .platform-grid { grid-template-columns: 1fr 1fr; }
+    .overview-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 700px) {
+    .main { padding: 16px; }
+    .platform-grid { grid-template-columns: 1fr; }
+    .overview-row { grid-template-columns: repeat(2, 1fr); }
+    .topbar { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">Attune</div>
+    <div class="gate-title">Operations Dashboard</div>
+    <input type="password" id="passwordInput" placeholder="Enter password" autocomplete="current-password">
+    <button onclick="login()">Enter</button>
+    <div class="gate-error" id="gateError">Wrong password</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="logo">Attune</div>
+      <div class="topbar-sep"></div>
+      <div class="topbar-title">Operations Dashboard</div>
+    </div>
+    <div class="topbar-right">
+      <div class="last-updated" id="lastUpdated">Loading...</div>
+      <button class="refresh-btn" onclick="loadData()">Refresh</button>
+      <div class="status-dot"></div>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- OVERVIEW ROW -->
+    <div class="overview-row">
+      <div class="stat-card pink">
+        <div class="stat-label">Total Users</div>
+        <div class="stat-value pink" id="totalUsers"><div class="skeleton"></div></div>
+        <div class="stat-sub">All time signups</div>
+        <div class="stat-badge up" id="newUsersWeekBadge"></div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Active Subscribers</div>
+        <div class="stat-value green" id="activeSubscribers"><div class="skeleton"></div></div>
+        <div class="stat-sub">Paying users right now</div>
+        <div class="stat-badge up" id="activeTrialsBadge"></div>
+      </div>
+      <div class="stat-card gold">
+        <div class="stat-label">MRR</div>
+        <div class="stat-value gold" id="mrr"><div class="skeleton"></div></div>
+        <div class="stat-sub">Monthly recurring revenue</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">Crashes Today</div>
+        <div class="stat-value blue" id="crashesToday"><div class="skeleton"></div></div>
+        <div class="stat-sub">New Sentry issues 24h</div>
+      </div>
+    </div>
+
+    <!-- PLATFORM PANELS -->
+    <div class="platform-grid">
+
+      <!-- SUPABASE -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <div class="panel-icon supabase">🗄️</div>
+            Supabase
+          </div>
+          <div class="panel-status" id="supabaseStatus">live</div>
+        </div>
+        <div class="panel-body">
+          <div class="panel-row">
+            <div class="panel-row-label">Total users</div>
+            <div class="panel-row-value green" id="sb-totalUsers">...</div>
+          </div>
+          <div class="panel-row">
+            <div class="panel-row-label">New signups today</div>
+            <div class="panel-row-value green" id="sb-newUsersToday">...</div>
+          </div>
+          <div class="panel-row">
+            <div class="panel-row-label">New signups this week</div>
+            <div class="panel-row-value green" id="sb-newUsersWeek">...</div>
+          </div>
+          <div class="panel-row">
+            <div class="panel-row-label">Check-ins today</div>
+            <div class="panel-row-value green" id="sb-checkinsToday">...</div>
+          </div>
+          <div class="panel-row">
+            <div class="panel-row-label">Total check-ins</div>
+            <div class="panel-row-value green" id="sb-checkinsTotal">...</div>
+          </div>
+          <div class="panel-row">
+            <div class="panel-row-label">Workout plans generated</div>
+            <div class="panel-row-value green" id="sb-workoutPlans">...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REVENUECAT -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <div class="panel-icon rc">💰</div>
+            RevenueCat
+          </div>
+          <div class="panel-status" id="rcStatus">live</div>
+        </div>
+        <div class="panel-body">
+          <div class="panel-row">
+            <div class="panel-row-label">Active subscriptions</div>
+            <div class="panel-row-value pink" id="rc-active">...</div>
+          </div>
+          <div class="panel-row">
+            <div class="panel-row-label">Active trials</div>
+            <div class="panel-row-value pink" id="rc-trials">...</div>
+          </div>
+          <div class="panel-row">
+            <div class="panel-row-label">MRR</div>
+            <div class="panel-row-value pink" id="rc-mrr">...</div>
+          </div>
+          <div class="panel-row">
+            <div class="panel-row-label">Revenue last 28 days</div>
+            <div class="panel-row-value pink" id="rc-revenue">...</div>
+          </div>
+          <div class="panel-row">
+            <div class="panel-row-label">New customers last 28d</div>
+            <div class="panel-row-value pink" id="rc-newCustomers">...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SENTRY -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <div class="panel-icon sentry">🪲</div>
+            Sentry
+          </div>
+          <div class="panel-status" id="sentryStatus">live</div>
+        </div>
+        <div class="panel-body">
+          <div class="panel-row">
+            <div class="panel-row-label">Unresolved issues</div>
+            <div class="panel-row-value blue" id="sentry-unresolved">...</div>
+          </div>
+          <div class="panel-row">
+            <div class="panel-row-label">New issues last 24h</div>
+            <div class="panel-row-value blue" id="sentry-new24h">...</div>
+          </div>
+          <div style="margin-top: 16px; margin-bottom: 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);">Top Errors</div>
+          <div id="sentry-errors">
+            <div class="skeleton" style="width:100%; margin-bottom:8px;"></div>
+            <div class="skeleton" style="width:80%; margin-bottom:8px;"></div>
+            <div class="skeleton" style="width:90%;"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const EDGE_URL = 'https://bnyaknuibngvikfktecq.supabase.co/functions/v1/ops-dashboard'
+  let savedPassword = ''
+
+  // Handle Enter key on password input
+  document.getElementById('passwordInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') login()
+  })
+
+  async function login() {
+    const password = document.getElementById('passwordInput').value
+    const errorEl = document.getElementById('gateError')
+    errorEl.style.display = 'none'
+
+    try {
+      const res = await fetch(EDGE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+      })
+
+      if (res.status === 401) {
+        errorEl.style.display = 'block'
+        return
+      }
+
+      if (!res.ok) throw new Error(`Error ${res.status}`)
+
+      savedPassword = password
+      const data = await res.json()
+      document.getElementById('gate').style.display = 'none'
+      document.getElementById('dashboard').style.display = 'block'
+      renderData(data)
+
+      // Auto refresh every 5 minutes
+      setInterval(loadData, 5 * 60 * 1000)
+    } catch (err) {
+      errorEl.textContent = 'Connection error. Try again.'
+      errorEl.style.display = 'block'
+    }
+  }
+
+  async function loadData() {
+    try {
+      const res = await fetch(EDGE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: savedPassword })
+      })
+      const data = await res.json()
+      renderData(data)
+    } catch (err) {
+      console.error('Refresh failed:', err)
+    }
+  }
+
+  function renderData(data) {
+    const { supabase, revenuecat, sentry, timestamp } = data
+
+    // Last updated
+    const time = new Date(timestamp).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
+    document.getElementById('lastUpdated').textContent = `Updated ${time}`
+
+    // SUPABASE
+    if (supabase && !supabase.error) {
+      set('totalUsers', supabase.totalUsers ?? 0)
+      set('sb-totalUsers', supabase.totalUsers ?? 0)
+      set('sb-newUsersToday', supabase.newUsersToday ?? 0)
+      set('sb-newUsersWeek', supabase.newUsersWeek ?? 0)
+      set('sb-checkinsToday', supabase.checkinsToday ?? 0)
+      set('sb-checkinsTotal', supabase.checkinsTotal ?? 0)
+      set('sb-workoutPlans', supabase.workoutPlans ?? 0)
+
+      const weekBadge = document.getElementById('newUsersWeekBadge')
+      weekBadge.textContent = `+${supabase.newUsersWeek ?? 0} this week`
+      weekBadge.className = 'stat-badge up'
+    } else {
+      document.getElementById('supabaseStatus').textContent = 'error'
+    }
+
+    // REVENUECAT
+    if (revenuecat && !revenuecat.error) {
+      set('activeSubscribers', revenuecat.activeSubscriptions ?? 0)
+      set('mrr', '$' + (revenuecat.mrr ?? 0).toFixed(2))
+      set('rc-active', revenuecat.activeSubscriptions ?? 0)
+      set('rc-trials', revenuecat.activeTrials ?? 0)
+      set('rc-mrr', '$' + (revenuecat.mrr ?? 0).toFixed(2))
+      set('rc-revenue', '$' + (revenuecat.revenue28d ?? 0).toFixed(2))
+      set('rc-newCustomers', revenuecat.newCustomers28d ?? 0)
+
+      const trialsBadge = document.getElementById('activeTrialsBadge')
+      trialsBadge.textContent = `${revenuecat.activeTrials ?? 0} on trial`
+      trialsBadge.className = 'stat-badge neutral'
+    } else {
+      document.getElementById('rcStatus').textContent = 'error'
+      set('activeSubscribers', 'err')
+      set('mrr', 'err')
+    }
+
+    // SENTRY
+    if (sentry && !sentry.error) {
+      set('crashesToday', sentry.newIssues24h ?? 0)
+      set('sentry-unresolved', sentry.unresolvedCount ?? 0)
+      set('sentry-new24h', sentry.newIssues24h ?? 0)
+
+      const errorsEl = document.getElementById('sentry-errors')
+      if (sentry.topErrors && sentry.topErrors.length > 0) {
+        errorsEl.innerHTML = sentry.topErrors.map(e => `
+          <div class="error-item">
+            <div class="error-title">${escHtml(e.title)}</div>
+            <div class="error-meta">
+              <span class="error-count">${e.count} events</span>
+              <span class="error-level">${e.level}</span>
+              <span class="error-time">${timeAgo(e.lastSeen)}</span>
+            </div>
+          </div>
+        `).join('')
+      } else {
+        errorsEl.innerHTML = '<div style="font-size:13px;color:var(--green);padding:8px 0;">No unresolved issues</div>'
+      }
+    } else {
+      document.getElementById('sentryStatus').textContent = 'error'
+      set('crashesToday', 'err')
+    }
+  }
+
+  function set(id, val) {
+    const el = document.getElementById(id)
+    if (el) el.textContent = val
+  }
+
+  function escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+  }
+
+  function timeAgo(dateStr) {
+    const diff = Date.now() - new Date(dateStr).getTime()
+    const mins = Math.floor(diff / 60000)
+    if (mins < 60) return `${mins}m ago`
+    const hrs = Math.floor(mins / 60)
+    if (hrs < 24) return `${hrs}h ago`
+    return `${Math.floor(hrs / 24)}d ago`
+  }
+</script>
+</body>
+</html>
