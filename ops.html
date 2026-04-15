@@ -36,7 +36,6 @@
     line-height: 1.5;
   }
 
-  /* PASSWORD GATE */
   .gate {
     min-height: 100vh;
     display: flex;
@@ -55,21 +54,8 @@
     text-align: center;
   }
 
-  .gate-logo {
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--pink);
-    margin-bottom: 8px;
-  }
-
-  .gate-title {
-    font-size: 22px;
-    font-weight: 400;
-    margin-bottom: 32px;
-    color: var(--text);
-  }
+  .gate-logo { font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); margin-bottom: 8px; }
+  .gate-title { font-size: 22px; font-weight: 400; margin-bottom: 32px; color: var(--text); }
 
   .gate input {
     width: 100%;
@@ -102,15 +88,8 @@
   }
 
   .gate button:hover { opacity: 0.85; }
+  .gate-error { color: var(--pink); font-size: 13px; margin-top: 12px; display: none; }
 
-  .gate-error {
-    color: var(--pink);
-    font-size: 13px;
-    margin-top: 12px;
-    display: none;
-  }
-
-  /* DASHBOARD */
   .dashboard { display: none; }
 
   .topbar {
@@ -126,33 +105,11 @@
     z-index: 100;
   }
 
-  .topbar-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .logo {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--pink);
-  }
-
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .logo { font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pink); }
   .topbar-sep { width: 1px; height: 20px; background: var(--border2); }
-
-  .topbar-title {
-    font-size: 14px;
-    color: var(--muted);
-    font-weight: 300;
-  }
-
-  .topbar-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
+  .topbar-title { font-size: 14px; color: var(--muted); font-weight: 300; }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
 
   .refresh-btn {
     background: var(--bg3);
@@ -166,13 +123,8 @@
     transition: all 0.2s;
   }
 
-  .refresh-btn:hover { color: var(--text); border-color: var(--border2); }
-
-  .last-updated {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted2);
-  }
+  .refresh-btn:hover { color: var(--text); }
+  .last-updated { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted2); }
 
   .status-dot {
     width: 7px; height: 7px;
@@ -182,19 +134,10 @@
     animation: pulse 2s infinite;
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-  /* MAIN GRID */
-  .main {
-    padding: 32px;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
+  .main { padding: 32px; max-width: 1400px; margin: 0 auto; }
 
-  /* OVERVIEW ROW */
   .overview-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -227,32 +170,13 @@
   .stat-card.gold::before { background: var(--gold); }
   .stat-card.blue::before { background: var(--blue); }
 
-  .stat-label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-
-  .stat-value {
-    font-family: 'DM Mono', monospace;
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
+  .stat-label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 32px; font-weight: 400; line-height: 1; margin-bottom: 6px; }
   .stat-value.pink { color: var(--pink); }
   .stat-value.green { color: var(--green); }
   .stat-value.gold { color: var(--gold); }
   .stat-value.blue { color: var(--blue); }
-
-  .stat-sub {
-    font-size: 12px;
-    color: var(--muted);
-  }
+  .stat-sub { font-size: 12px; color: var(--muted); }
 
   .stat-badge {
     display: inline-flex;
@@ -267,6 +191,136 @@
 
   .stat-badge.up { background: rgba(0,229,160,0.12); color: var(--green); }
   .stat-badge.neutral { background: rgba(255,255,255,0.06); color: var(--muted); }
+
+  /* CALENDAR */
+  .calendar-section {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .calendar-title {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--text);
+  }
+
+  .calendar-legend {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 2px;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+
+  .calendar-day-label {
+    font-size: 10px;
+    color: var(--muted2);
+    text-align: center;
+    padding-bottom: 6px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .calendar-cell {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    cursor: default;
+    transition: border-color 0.15s;
+    position: relative;
+  }
+
+  .calendar-cell:hover { border-color: var(--border2); }
+  .calendar-cell:hover .cal-tooltip { display: block; }
+
+  .calendar-cell.today { border-color: var(--pink); }
+
+  .calendar-cell.has-signups { background: rgba(0,229,160,0.08); }
+  .calendar-cell.has-checkins { background: rgba(77,159,255,0.08); }
+  .calendar-cell.has-both { background: rgba(255,179,71,0.08); }
+
+  .cal-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted2);
+    line-height: 1;
+  }
+
+  .cal-dots {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+  }
+
+  .cal-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+  }
+
+  .cal-dot.signup { background: var(--green); }
+  .cal-dot.checkin { background: var(--blue); }
+
+  .cal-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg4);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 8px 10px;
+    white-space: nowrap;
+    font-size: 11px;
+    color: var(--text);
+    z-index: 10;
+    pointer-events: none;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .cal-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: var(--border2);
+  }
 
   /* PLATFORM GRID */
   .platform-grid {
@@ -290,24 +344,8 @@
     border-bottom: 1px solid var(--border);
   }
 
-  .panel-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-  }
-
-  .panel-icon {
-    width: 28px; height: 28px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-  }
-
+  .panel-title { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; letter-spacing: 0.06em; }
+  .panel-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
   .panel-icon.supabase { background: rgba(0,229,160,0.12); }
   .panel-icon.rc { background: rgba(255,77,106,0.12); }
   .panel-icon.sentry { background: rgba(77,159,255,0.12); }
@@ -333,70 +371,21 @@
   }
 
   .panel-row:last-child { border-bottom: none; }
-
-  .panel-row-label {
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  .panel-row-value {
-    font-family: 'DM Mono', monospace;
-    font-size: 14px;
-    font-weight: 400;
-  }
-
+  .panel-row-label { font-size: 13px; color: var(--muted); }
+  .panel-row-value { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400; }
   .panel-row-value.pink { color: var(--pink); }
   .panel-row-value.green { color: var(--green); }
   .panel-row-value.gold { color: var(--gold); }
   .panel-row-value.blue { color: var(--blue); }
 
-  /* SENTRY ERRORS */
-  .error-item {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
+  .error-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
   .error-item:last-child { border-bottom: none; }
+  .error-title { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--text); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .error-meta { display: flex; align-items: center; gap: 10px; }
+  .error-count { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--pink); background: rgba(255,77,106,0.10); padding: 2px 8px; border-radius: 5px; }
+  .error-level { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .error-time { font-size: 11px; color: var(--muted2); margin-left: auto; }
 
-  .error-title {
-    font-size: 12px;
-    font-family: 'DM Mono', monospace;
-    color: var(--text);
-    margin-bottom: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .error-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .error-count {
-    font-size: 11px;
-    font-family: 'DM Mono', monospace;
-    color: var(--pink);
-    background: rgba(255,77,106,0.10);
-    padding: 2px 8px;
-    border-radius: 5px;
-  }
-
-  .error-level {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-  }
-
-  .error-time {
-    font-size: 11px;
-    color: var(--muted2);
-    margin-left: auto;
-  }
-
-  /* LOADING */
   .skeleton {
     background: linear-gradient(90deg, var(--bg3) 25%, var(--bg4) 50%, var(--bg3) 75%);
     background-size: 200% 100%;
@@ -406,12 +395,8 @@
     width: 60px;
   }
 
-  @keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-  /* RESPONSIVE */
   @media (max-width: 1100px) {
     .platform-grid { grid-template-columns: 1fr 1fr; }
     .overview-row { grid-template-columns: repeat(2, 1fr); }
@@ -427,7 +412,6 @@
 </head>
 <body>
 
-<!-- PASSWORD GATE -->
 <div class="gate" id="gate">
   <div class="gate-box">
     <div class="gate-logo">Attune</div>
@@ -438,7 +422,6 @@
   </div>
 </div>
 
-<!-- DASHBOARD -->
 <div class="dashboard" id="dashboard">
 
   <div class="topbar">
@@ -482,10 +465,35 @@
       </div>
     </div>
 
+    <!-- ACTIVITY CALENDAR -->
+    <div class="calendar-section">
+      <div class="calendar-header">
+        <div class="calendar-title">Activity — Last 30 Days</div>
+        <div class="calendar-legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--green);"></div>
+            Signups
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--blue);"></div>
+            Check-ins
+          </div>
+        </div>
+      </div>
+      <div class="calendar-grid" id="calendarGrid">
+        <div class="calendar-day-label">Mon</div>
+        <div class="calendar-day-label">Tue</div>
+        <div class="calendar-day-label">Wed</div>
+        <div class="calendar-day-label">Thu</div>
+        <div class="calendar-day-label">Fri</div>
+        <div class="calendar-day-label">Sat</div>
+        <div class="calendar-day-label">Sun</div>
+      </div>
+    </div>
+
     <!-- PLATFORM PANELS -->
     <div class="platform-grid">
 
-      <!-- SUPABASE -->
       <div class="panel">
         <div class="panel-header">
           <div class="panel-title">
@@ -522,7 +530,6 @@
         </div>
       </div>
 
-      <!-- REVENUECAT -->
       <div class="panel">
         <div class="panel-header">
           <div class="panel-title">
@@ -555,7 +562,6 @@
         </div>
       </div>
 
-      <!-- SENTRY -->
       <div class="panel">
         <div class="panel-header">
           <div class="panel-title">
@@ -590,7 +596,6 @@
   const EDGE_URL = 'https://bnyaknuibngvikfktecq.supabase.co/functions/v1/ops-dashboard'
   let savedPassword = ''
 
-  // Handle Enter key on password input
   document.getElementById('passwordInput').addEventListener('keydown', e => {
     if (e.key === 'Enter') login()
   })
@@ -607,11 +612,7 @@
         body: JSON.stringify({ password })
       })
 
-      if (res.status === 401) {
-        errorEl.style.display = 'block'
-        return
-      }
-
+      if (res.status === 401) { errorEl.style.display = 'block'; return }
       if (!res.ok) throw new Error(`Error ${res.status}`)
 
       savedPassword = password
@@ -619,8 +620,6 @@
       document.getElementById('gate').style.display = 'none'
       document.getElementById('dashboard').style.display = 'block'
       renderData(data)
-
-      // Auto refresh every 5 minutes
       setInterval(loadData, 5 * 60 * 1000)
     } catch (err) {
       errorEl.textContent = 'Connection error. Try again.'
@@ -642,14 +641,89 @@
     }
   }
 
+  function renderCalendar(dailyActivity) {
+    const grid = document.getElementById('calendarGrid')
+
+    // Clear existing day cells (keep day labels)
+    const labels = grid.querySelectorAll('.calendar-day-label')
+    grid.innerHTML = ''
+    labels.forEach(l => grid.appendChild(l))
+
+    const today = new Date()
+    const todayStr = today.toISOString().split('T')[0]
+
+    // Build last 30 days array
+    const days = []
+    for (let i = 29; i >= 0; i--) {
+      const d = new Date(today)
+      d.setDate(d.getDate() - i)
+      days.push(d)
+    }
+
+    // Find the day of week of the first day (0=Sun, needs to be Mon-based)
+    const firstDay = days[0]
+    const firstDow = firstDay.getDay() // 0=Sun
+    const mondayOffset = firstDow === 0 ? 6 : firstDow - 1
+
+    // Add empty cells for offset
+    for (let i = 0; i < mondayOffset; i++) {
+      const empty = document.createElement('div')
+      empty.style.aspectRatio = '1'
+      grid.appendChild(empty)
+    }
+
+    // Add day cells
+    for (const d of days) {
+      const dateStr = d.toISOString().split('T')[0]
+      const activity = dailyActivity?.[dateStr] || { signups: 0, checkins: 0 }
+      const isToday = dateStr === todayStr
+
+      const cell = document.createElement('div')
+      cell.className = 'calendar-cell'
+      if (isToday) cell.classList.add('today')
+      if (activity.signups > 0 && activity.checkins > 0) cell.classList.add('has-both')
+      else if (activity.signups > 0) cell.classList.add('has-signups')
+      else if (activity.checkins > 0) cell.classList.add('has-checkins')
+
+      const dayNum = d.getDate()
+      const dateLabel = document.createElement('div')
+      dateLabel.className = 'cal-date'
+      dateLabel.textContent = dayNum
+
+      const dots = document.createElement('div')
+      dots.className = 'cal-dots'
+
+      if (activity.signups > 0) {
+        for (let s = 0; s < Math.min(activity.signups, 3); s++) {
+          const dot = document.createElement('div')
+          dot.className = 'cal-dot signup'
+          dots.appendChild(dot)
+        }
+      }
+
+      if (activity.checkins > 0) {
+        const dot = document.createElement('div')
+        dot.className = 'cal-dot checkin'
+        dots.appendChild(dot)
+      }
+
+      const tooltip = document.createElement('div')
+      tooltip.className = 'cal-tooltip'
+      tooltip.innerHTML = `${dateStr}<br>👤 ${activity.signups} signup${activity.signups !== 1 ? 's' : ''}<br>✓ ${activity.checkins} check-in${activity.checkins !== 1 ? 's' : ''}`
+
+      cell.appendChild(dateLabel)
+      cell.appendChild(dots)
+      cell.appendChild(tooltip)
+      grid.appendChild(cell)
+    }
+  }
+
   function renderData(data) {
     const { supabase, revenuecat, sentry, timestamp } = data
 
-    // Last updated
     const time = new Date(timestamp).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
     document.getElementById('lastUpdated').textContent = `Updated ${time}`
 
-    // SUPABASE
     if (supabase && !supabase.error) {
       set('totalUsers', supabase.totalUsers ?? 0)
       set('sb-totalUsers', supabase.totalUsers ?? 0)
@@ -662,18 +736,19 @@
       const weekBadge = document.getElementById('newUsersWeekBadge')
       weekBadge.textContent = `+${supabase.newUsersWeek ?? 0} this week`
       weekBadge.className = 'stat-badge up'
+
+      renderCalendar(supabase.dailyActivity)
     } else {
       document.getElementById('supabaseStatus').textContent = 'error'
     }
 
-    // REVENUECAT
     if (revenuecat && !revenuecat.error) {
       set('activeSubscribers', revenuecat.activeSubscriptions ?? 0)
-      set('mrr', '$' + (revenuecat.mrr ?? 0).toFixed(2))
+      set('mrr', '$' + (revenuecat.mrr ?? 0).toFixed ? '$' + Number(revenuecat.mrr ?? 0).toFixed(2) : revenuecat.mrr)
       set('rc-active', revenuecat.activeSubscriptions ?? 0)
       set('rc-trials', revenuecat.activeTrials ?? 0)
-      set('rc-mrr', '$' + (revenuecat.mrr ?? 0).toFixed(2))
-      set('rc-revenue', '$' + (revenuecat.revenue28d ?? 0).toFixed(2))
+      set('rc-mrr', revenuecat.mrr === '—' ? '—' : '$' + Number(revenuecat.mrr ?? 0).toFixed(2))
+      set('rc-revenue', revenuecat.revenue28d === '—' ? '—' : '$' + Number(revenuecat.revenue28d ?? 0).toFixed(2))
       set('rc-newCustomers', revenuecat.newCustomers28d ?? 0)
 
       const trialsBadge = document.getElementById('activeTrialsBadge')
@@ -685,7 +760,6 @@
       set('mrr', 'err')
     }
 
-    // SENTRY
     if (sentry && !sentry.error) {
       set('crashesToday', sentry.newIssues24h ?? 0)
       set('sentry-unresolved', sentry.unresolvedCount ?? 0)
@@ -709,6 +783,10 @@
     } else {
       document.getElementById('sentryStatus').textContent = 'error'
       set('crashesToday', 'err')
+      set('sentry-unresolved', 'err')
+      set('sentry-new24h', 'err')
+      const errorsEl = document.getElementById('sentry-errors')
+      errorsEl.innerHTML = `<div style="font-size:12px;color:var(--pink);padding:8px 0;">${sentry?.error || 'Failed to load'}</div>`
     }
   }
 
