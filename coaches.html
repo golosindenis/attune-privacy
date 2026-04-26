@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attune Coach — For Coaches Who Work With Women 35+</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8C98A;
+    --gold-dim: rgba(201,169,110,0.15);
+    --red: #FF4D6A;
+    --bg: #080808;
+    --bg2: #0F0F0F;
+    --card: #141414;
+    --border: rgba(201,169,110,0.18);
+    --text: #F5F0E8;
+    --muted: rgba(245,240,232,0.5);
+    --faint: rgba(245,240,232,0.25);
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    overflow: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed; width: 10px; height: 10px;
+    background: var(--gold); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s;
+    mix-blend-mode: normal;
+  }
+  .cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1px solid rgba(201,169,110,0.4); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, width 0.3s, height 0.3s;
+  }
+
+  /* Slides container */
+  .slides { width: 100vw; height: 100vh; position: relative; }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.7s ease;
+    padding: 60px;
+    overflow: hidden;
+  }
+  .slide.active { opacity: 1; pointer-events: all; }
+
+  /* Noise texture overlay */
+  .slide::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.4; pointer-events: none; z-index: 0;
+  }
+
+  /* Navigation */
+  .nav {
+    position: fixed; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 10px; z-index: 100;
+    align-items: center;
+  }
+  .nav-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--faint); cursor: none;
+    transition: all 0.3s; border: 1px solid transparent;
+  }
+  .nav-dot.active { background: var(--gold); width: 24px; border-radius: 3px; }
+
+  .nav-arrows {
+    position: fixed; top: 50%; right: 40px;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 12px; z-index: 100;
+  }
+  .nav-arrow {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid var(--border);
+    background: rgba(20,20,20,0.8);
+    display: flex; align-items: center; justify-content: center;
+    cursor: none; transition: all 0.3s;
+    color: var(--gold); font-size: 16px;
+  }
+  .nav-arrow:hover { border-color: var(--gold); background: var(--gold-dim); }
+
+  /* Slide counter */
+  .slide-counter {
+    position: fixed; top: 40px; right: 56px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; color: var(--faint);
+    letter-spacing: 2px; z-index: 100;
+  }
+
+  /* Logo */
+  .logo-fixed {
+    position: fixed; top: 40px; left: 56px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 500;
+    color: var(--gold); letter-spacing: 4px;
+    z-index: 100;
+  }
+
+  /* ─── SLIDE 1: Hero ─── */
+  .s1-inner {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    width: 100%; max-width: 1200px;
+  }
+
+  .s1-left { display: flex; flex-direction: column; gap: 32px; }
+
+  .s1-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 4px; color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .s1-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 300; line-height: 1.1;
+    color: var(--text);
+  }
+  .s1-title em { color: var(--gold); font-style: italic; }
+
+  .s1-sub {
+    font-size: 16px; color: var(--muted);
+    line-height: 1.7; max-width: 440px; font-weight: 300;
+  }
+
+  .s1-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--gold); color: #080808;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 16px 32px; border-radius: 2px;
+    text-decoration: none; width: fit-content;
+    transition: all 0.3s;
+  }
+  .s1-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* 3D Phone mockup */
+  .phone-wrap {
+    position: relative; display: flex;
+    justify-content: center; align-items: center;
+    perspective: 1200px;
+  }
+
+  .phone {
+    width: 260px; height: 520px;
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border-radius: 40px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow:
+      0 60px 120px rgba(0,0,0,0.8),
+      0 0 0 1px rgba(255,255,255,0.04),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+    transform: rotateY(-15deg) rotateX(5deg) rotateZ(2deg);
+    transform-style: preserve-3d;
+    animation: phoneFloat 6s ease-in-out infinite;
+    position: relative; overflow: hidden;
+  }
+
+  @keyframes phoneFloat {
+    0%, 100% { transform: rotateY(-15deg) rotateX(5deg) rotateZ(2deg) translateY(0px); }
+    50% { transform: rotateY(-15deg) rotateX(5deg) rotateZ(2deg) translateY(-16px); }
+  }
+
+  .phone-screen {
+    position: absolute; inset: 12px;
+    background: #0D0D0D; border-radius: 30px;
+    overflow: hidden; display: flex; flex-direction: column;
+    padding: 20px 16px;
+  }
+
+  .phone-status {
+    display: flex; justify-content: space-between;
+    font-size: 9px; color: rgba(255,255,255,0.4);
+    margin-bottom: 16px;
+  }
+
+  .phone-greeting {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px; color: var(--gold);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .phone-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; color: #F5F0E8;
+    margin-bottom: 12px;
+  }
+
+  .phone-readiness-card {
+    background: linear-gradient(135deg, rgba(201,169,110,0.12), rgba(201,169,110,0.04));
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 14px; padding: 12px;
+    margin-bottom: 10px;
+  }
+  .phone-readiness-label { font-size: 7px; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+  .phone-readiness-score { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: #F5F0E8; line-height: 1; }
+  .phone-readiness-sub { font-size: 7px; color: rgba(245,240,232,0.4); margin-top: 2px; }
+
+  .phone-phase-row {
+    display: flex; gap: 6px; margin-bottom: 10px;
+  }
+  .phone-phase-chip {
+    flex: 1; background: rgba(255,77,106,0.1);
+    border: 1px solid rgba(255,77,106,0.25);
+    border-radius: 8px; padding: 6px 8px;
+    font-size: 7px; color: #FF4D6A;
+    text-align: center;
+  }
+  .phone-phase-chip.green { background: rgba(0,229,160,0.1); border-color: rgba(0,229,160,0.25); color: #00E5A0; }
+
+  .phone-coach-note {
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px; padding: 8px 10px;
+    font-size: 7px; color: rgba(245,240,232,0.5);
+    line-height: 1.5; border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .phone-notch {
+    position: absolute; top: 12px; left: 50%;
+    transform: translateX(-50%);
+    width: 100px; height: 28px;
+    background: #0a0a0a; border-radius: 0 0 16px 16px;
+    z-index: 10;
+  }
+
+  /* Glow behind phone */
+  .phone-glow {
+    position: absolute;
+    width: 300px; height: 300px;
+    background: radial-gradient(ellipse, rgba(201,169,110,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+
+  /* ─── SLIDE 2: Problem ─── */
+  .s2-inner {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 1000px;
+    display: flex; flex-direction: column; gap: 56px;
+  }
+
+  .slide-label {
+    font-size: 10px; letter-spacing: 4px;
+    color: var(--gold); text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .slide-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4.5vw, 58px);
+    font-weight: 300; line-height: 1.15;
+  }
+  .slide-headline em { color: var(--gold); font-style: italic; }
+
+  .problem-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .problem-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px; padding: 28px 24px;
+    display: flex; flex-direction: column; gap: 12px;
+    position: relative; overflow: hidden;
+  }
+  .problem-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  .problem-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300;
+    color: rgba(201,169,110,0.15); line-height: 1;
+  }
+  .problem-title {
+    font-size: 14px; font-weight: 600; color: var(--text);
+  }
+  .problem-desc {
+    font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300;
+  }
+
+  /* ─── SLIDE 3: Solution ─── */
+  .s3-inner {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 1200px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+
+  .feature-list { display: flex; flex-direction: column; gap: 28px; }
+
+  .feature-item {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(201,169,110,0.08);
+  }
+  .feature-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .feature-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--gold-dim); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+
+  .feature-text { display: flex; flex-direction: column; gap: 4px; }
+  .feature-title { font-size: 15px; font-weight: 600; color: var(--text); }
+  .feature-desc { font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+  /* Dashboard mockup */
+  .dashboard-mock {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+    transform: rotateY(8deg) rotateX(-2deg);
+    transform-style: preserve-3d;
+    animation: dashFloat 7s ease-in-out infinite;
+  }
+  @keyframes dashFloat {
+    0%, 100% { transform: rotateY(8deg) rotateX(-2deg) translateY(0px); }
+    50% { transform: rotateY(8deg) rotateX(-2deg) translateY(-10px); }
+  }
+
+  .dash-header {
+    background: rgba(201,169,110,0.06);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .dash-dots { display: flex; gap: 6px; }
+  .dash-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .dash-title {
+    font-size: 12px; color: var(--gold);
+    letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 500; margin-left: 8px;
+  }
+
+  .dash-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+
+  .dash-client-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px; background: rgba(255,255,255,0.03);
+    border-radius: 10px; border: 1px solid rgba(255,255,255,0.05);
+  }
+  .dash-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 600;
+    flex-shrink: 0;
+  }
+  .dash-client-info { flex: 1; }
+  .dash-client-name { font-size: 13px; color: var(--text); font-weight: 500; }
+  .dash-client-meta { font-size: 10px; color: var(--muted); }
+  .dash-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 500;
+  }
+  .dash-phase {
+    font-size: 9px; padding: 3px 8px; border-radius: 20px;
+    font-weight: 500; letter-spacing: 0.5px;
+  }
+
+  /* ─── SLIDE 4: How it works ─── */
+  .s4-inner {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 1000px;
+    display: flex; flex-direction: column; gap: 56px;
+  }
+
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+
+  .step {
+    display: flex; flex-direction: column; gap: 16px;
+    padding: 32px 24px; position: relative;
+  }
+  .step:not(:last-child)::after {
+    content: '→';
+    position: absolute; right: -8px; top: 44px;
+    color: var(--gold); font-size: 18px; opacity: 0.4;
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px; font-weight: 300;
+    color: rgba(201,169,110,0.12); line-height: 1;
+  }
+  .step-title { font-size: 15px; font-weight: 600; color: var(--text); }
+  .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+  .step-line {
+    position: absolute; bottom: 0; left: 24px; right: 24px;
+    height: 1px; background: var(--border);
+  }
+
+  /* ─── SLIDE 5: Differentiation ─── */
+  .s5-inner {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 1000px;
+    display: flex; flex-direction: column; gap: 48px;
+  }
+
+  .compare-table {
+    border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .compare-row {
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    border-bottom: 1px solid rgba(201,169,110,0.08);
+  }
+  .compare-row:last-child { border-bottom: none; }
+
+  .compare-cell {
+    padding: 16px 24px; font-size: 13px;
+    display: flex; align-items: center;
+  }
+  .compare-cell.header {
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted);
+    font-weight: 500; padding: 12px 24px;
+    background: rgba(255,255,255,0.02);
+  }
+  .compare-cell.attune-col { color: var(--gold); font-weight: 500; }
+  .compare-cell.center { justify-content: center; }
+
+  .check { color: #00E5A0; font-size: 16px; }
+  .cross { color: rgba(255,255,255,0.2); font-size: 16px; }
+
+  .attune-highlight { background: rgba(201,169,110,0.04); }
+
+  /* ─── SLIDE 6: Testimonial / Social proof ─── */
+  .s6-inner {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 900px;
+    display: flex; flex-direction: column;
+    gap: 56px; align-items: center; text-align: center;
+  }
+
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px; color: var(--gold);
+    opacity: 0.2; line-height: 0.6;
+    align-self: flex-start; margin-bottom: -20px;
+  }
+
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 300; line-height: 1.4;
+    font-style: italic; color: var(--text);
+  }
+  .quote-text em { color: var(--gold); font-style: normal; }
+
+  .quote-author {
+    display: flex; flex-direction: column; gap: 4px;
+    align-items: center;
+  }
+  .quote-name { font-size: 14px; font-weight: 600; color: var(--text); }
+  .quote-role { font-size: 12px; color: var(--muted); }
+
+  .stats-row { display: flex; gap: 60px; justify-content: center; }
+  .stat-item { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight: 300; color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); text-align: center; letter-spacing: 0.5px; }
+
+  /* ─── SLIDE 7: CTA ─── */
+  .s7-inner {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+    gap: 40px; max-width: 700px;
+  }
+
+  .s7-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 6vw, 76px);
+    font-weight: 300; line-height: 1.1;
+  }
+  .s7-title em { color: var(--gold); font-style: italic; }
+
+  .s7-sub {
+    font-size: 16px; color: var(--muted);
+    line-height: 1.7; font-weight: 300;
+    max-width: 500px;
+  }
+
+  .cta-group { display: flex; gap: 16px; }
+
+  .cta-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--gold); color: #080808;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 18px 40px; border-radius: 2px;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .cta-primary:hover { background: var(--gold-light); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(201,169,110,0.3); }
+
+  .cta-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid var(--border); color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 18px 40px; border-radius: 2px;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .cta-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  .s7-url {
+    font-size: 12px; color: var(--faint);
+    letter-spacing: 2px;
+  }
+
+  /* Decorative lines */
+  .deco-line {
+    position: absolute; background: linear-gradient(90deg, transparent, var(--border), transparent);
+    height: 1px; width: 100%;
+  }
+
+  /* Background grid */
+  .bg-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,169,110,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,169,110,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+  }
+
+  /* Slide entrance animations */
+  .slide.active .s1-left > * {
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .slide.active .s1-left > *:nth-child(1) { animation-delay: 0.1s; opacity: 0; }
+  .slide.active .s1-left > *:nth-child(2) { animation-delay: 0.2s; opacity: 0; }
+  .slide.active .s1-left > *:nth-child(3) { animation-delay: 0.35s; opacity: 0; }
+  .slide.active .s1-left > *:nth-child(4) { animation-delay: 0.5s; opacity: 0; }
+
+  .slide.active .problem-card {
+    animation: fadeUp 0.6s ease forwards;
+    opacity: 0;
+  }
+  .slide.active .problem-card:nth-child(1) { animation-delay: 0.3s; }
+  .slide.active .problem-card:nth-child(2) { animation-delay: 0.45s; }
+  .slide.active .problem-card:nth-child(3) { animation-delay: 0.6s; }
+
+  .slide.active .step {
+    animation: fadeUp 0.6s ease forwards; opacity: 0;
+  }
+  .slide.active .step:nth-child(1) { animation-delay: 0.2s; }
+  .slide.active .step:nth-child(2) { animation-delay: 0.35s; }
+  .slide.active .step:nth-child(3) { animation-delay: 0.5s; }
+  .slide.active .step:nth-child(4) { animation-delay: 0.65s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed; top: 0; left: 0; height: 2px;
+    background: var(--gold); z-index: 100;
+    transition: width 0.5s ease;
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="progress-bar" id="progressBar"></div>
+<div class="logo-fixed">ATTUNE</div>
+<div class="slide-counter" id="slideCounter">01 / 07</div>
+
+<div class="slides" id="slides">
+
+  <!-- SLIDE 1: Hero -->
+  <div class="slide active" id="slide-0">
+    <div class="bg-grid"></div>
+    <!-- Radial glow -->
+    <div style="position:absolute;width:600px;height:600px;background:radial-gradient(ellipse,rgba(201,169,110,0.06) 0%,transparent 70%);top:50%;left:30%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+
+    <div class="s1-inner">
+      <div class="s1-left">
+        <div class="s1-eyebrow">For Coaches Who Work With Women 35+</div>
+        <h1 class="s1-title">
+          Train Her<br>
+          <em>Differently.</em>
+        </h1>
+        <p class="s1-sub">
+          The world's first hormone-intelligent coaching platform. Give your clients AI-powered workout and meal plans that adapt to their cycle, readiness, and health conditions — automatically.
+        </p>
+        <a href="https://calendly.com" class="s1-cta" target="_blank">
+          Book a Discovery Call →
+        </a>
+      </div>
+
+      <div class="phone-wrap">
+        <div class="phone-glow"></div>
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div style="height:20px;"></div>
+            <div class="phone-status">
+              <span>9:41</span><span>◼◼◼</span>
+            </div>
+            <div class="phone-greeting">GOOD MORNING</div>
+            <div class="phone-name">Sarah</div>
+            <div class="phone-readiness-card">
+              <div class="phone-readiness-label">Today's Readiness</div>
+              <div class="phone-readiness-score">78</div>
+              <div class="phone-readiness-sub">Strong day ahead · Follicular phase</div>
+            </div>
+            <div class="phone-phase-row">
+              <div class="phone-phase-chip">🌒 Follicular</div>
+              <div class="phone-phase-chip green">↑ Energy rising</div>
+            </div>
+            <div class="phone-coach-note">
+              "Your hormones are working with you today Sarah. Strength training window is optimal — push your compounds."
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: Problem -->
+  <div class="slide" id="slide-1">
+    <div class="bg-grid"></div>
+    <div class="s2-inner">
+      <div>
+        <div class="slide-label" style="margin-bottom:16px;">The Problem</div>
+        <h2 class="slide-headline">
+          Generic programmes<br>
+          <em>fail women over 35.</em>
+        </h2>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-num">01</div>
+          <div class="problem-title">Hormones are ignored</div>
+          <div class="problem-desc">Standard fitness apps treat every day the same. But women's energy, strength, and recovery change dramatically across their cycle and with conditions like PCOS and perimenopause.</div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-num">02</div>
+          <div class="problem-title">Coaches spend hours on plans</div>
+          <div class="problem-desc">Writing personalised workout and meal plans for every client every week is unsustainable. Most coaches either compromise on quality or limit their client roster.</div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-num">03</div>
+          <div class="problem-title">Clients don't see results</div>
+          <div class="problem-desc">When plans don't account for hormonal fluctuations, women plateau, lose motivation, and churn. Without the right context, coaches can't explain why progress stalls.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Solution -->
+  <div class="slide" id="slide-2">
+    <div class="bg-grid"></div>
+    <div class="s3-inner">
+      <div>
+        <div class="slide-label" style="margin-bottom:16px;">The Solution</div>
+        <h2 class="slide-headline" style="margin-bottom:40px;">
+          AI that understands<br>
+          <em>her hormones.</em>
+        </h2>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">🔄</div>
+            <div class="feature-text">
+              <div class="feature-title">Readiness-first programming</div>
+              <div class="feature-desc">Daily check-ins drive session intensity. Cycle phase provides hormonal context. Your client gets the right workout on the right day — automatically.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🧬</div>
+            <div class="feature-text">
+              <div class="feature-title">Condition-aware AI</div>
+              <div class="feature-desc">PCOS, hypothyroidism, endometriosis, perimenopause, GLP-1 — the AI stacks conditions intelligently and always defaults to the safer recommendation.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🥗</div>
+            <div class="feature-text">
+              <div class="feature-title">Hormone-intelligent nutrition</div>
+              <div class="feature-desc">7-day meal plans with carb cycling tied to training days. Iron during menstruation, phytoestrogens in follicular — food science, not guesswork.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📊</div>
+            <div class="feature-text">
+              <div class="feature-title">Your coach dashboard</div>
+              <div class="feature-desc">See every client's readiness, cycle phase, bloodwork flags, and workout logs. Edit plans, add notes, and message clients — all in one place.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="perspective:1000px;">
+        <div class="dashboard-mock">
+          <div class="dash-header">
+            <div class="dash-dots">
+              <div class="dash-dot" style="background:#FF4D6A;"></div>
+              <div class="dash-dot" style="background:#FFB347;"></div>
+              <div class="dash-dot" style="background:#00E5A0;"></div>
+            </div>
+            <div class="dash-title">Coach Dashboard</div>
+          </div>
+          <div class="dash-body">
+            <div style="font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">Your Clients</div>
+
+            <div class="dash-client-row">
+              <div class="dash-avatar" style="background:rgba(255,77,106,0.15);color:#FF4D6A;">S</div>
+              <div class="dash-client-info">
+                <div class="dash-client-name">Sarah M.</div>
+                <div class="dash-client-meta">Follicular · PCOS · Week 2</div>
+              </div>
+              <div class="dash-score" style="color:#00E5A0;">78</div>
+              <div class="dash-phase" style="background:rgba(0,229,160,0.1);color:#00E5A0;">Strong</div>
+            </div>
+
+            <div class="dash-client-row">
+              <div class="dash-avatar" style="background:rgba(201,169,110,0.15);color:var(--gold);">J</div>
+              <div class="dash-client-info">
+                <div class="dash-client-name">Jessica T.</div>
+                <div class="dash-client-meta">Luteal · Perimenopause · Week 3</div>
+              </div>
+              <div class="dash-score" style="color:#FFB347;">52</div>
+              <div class="dash-phase" style="background:rgba(255,179,71,0.1);color:#FFB347;">Moderate</div>
+            </div>
+
+            <div class="dash-client-row">
+              <div class="dash-avatar" style="background:rgba(0,229,160,0.15);color:#00E5A0;">A</div>
+              <div class="dash-client-info">
+                <div class="dash-client-name">Amanda R.</div>
+                <div class="dash-client-meta">Ovulatory · GLP-1 · Week 1</div>
+              </div>
+              <div class="dash-score" style="color:#00E5A0;">85</div>
+              <div class="dash-phase" style="background:rgba(0,229,160,0.1);color:#00E5A0;">Peak</div>
+            </div>
+
+            <div style="margin-top:8px;padding:10px;background:rgba(201,169,110,0.06);border-radius:8px;border:1px solid var(--border);">
+              <div style="font-size:9px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Today's Flags</div>
+              <div style="font-size:10px;color:var(--muted);">⚠ Jessica: Readiness dropped 18 pts — consider modifying today's session</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: How it works -->
+  <div class="slide" id="slide-3">
+    <div class="bg-grid"></div>
+    <div class="s4-inner">
+      <div>
+        <div class="slide-label" style="margin-bottom:16px;">How It Works</div>
+        <h2 class="slide-headline">
+          Set up once.<br>
+          <em>AI does the rest.</em>
+        </h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-title">Invite your client</div>
+          <div class="step-desc">Send a personalised invite link. Your client downloads the Attune app and completes onboarding — goals, conditions, cycle data, preferences.</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-title">AI builds her plan</div>
+          <div class="step-desc">Within minutes, Attune generates a personalised 4-week workout programme and 7-day meal plan based on her full profile and health conditions.</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-title">Plans adapt daily</div>
+          <div class="step-desc">Every morning your client checks in. Readiness score adjusts session intensity in real time. You see everything on your dashboard.</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-title">You add your touch</div>
+          <div class="step-desc">Edit plans, add coaching notes, message clients, review bloodwork insights. Attune handles the science — you bring the relationship.</div>
+          <div class="step-line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: Why Attune vs others -->
+  <div class="slide" id="slide-4">
+    <div class="bg-grid"></div>
+    <div class="s5-inner">
+      <div>
+        <div class="slide-label" style="margin-bottom:16px;">Why Attune</div>
+        <h2 class="slide-headline">
+          Built for women.<br>
+          <em>Not adapted for them.</em>
+        </h2>
+      </div>
+      <div class="compare-table">
+        <div class="compare-row">
+          <div class="compare-cell header">Feature</div>
+          <div class="compare-cell header center attune-col">Attune Coach</div>
+          <div class="compare-cell header center">Generic Platforms</div>
+        </div>
+        <div class="compare-row attune-highlight">
+          <div class="compare-cell" style="color:var(--text);">Hormone-intelligent AI plans</div>
+          <div class="compare-cell center attune-col"><span class="check">✓</span></div>
+          <div class="compare-cell center"><span class="cross">✗</span></div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell" style="color:var(--text);">Readiness score driving intensity</div>
+          <div class="compare-cell center attune-col"><span class="check">✓</span></div>
+          <div class="compare-cell center"><span class="cross">✗</span></div>
+        </div>
+        <div class="compare-row attune-highlight">
+          <div class="compare-cell" style="color:var(--text);">PCOS, perimenopause, GLP-1 protocols</div>
+          <div class="compare-cell center attune-col"><span class="check">✓</span></div>
+          <div class="compare-cell center"><span class="cross">✗</span></div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell" style="color:var(--text);">Carb cycling tied to training schedule</div>
+          <div class="compare-cell center attune-col"><span class="check">✓</span></div>
+          <div class="compare-cell center"><span class="cross">✗</span></div>
+        </div>
+        <div class="compare-row attune-highlight">
+          <div class="compare-cell" style="color:var(--text);">Bloodwork insights integrated</div>
+          <div class="compare-cell center attune-col"><span class="check">✓</span></div>
+          <div class="compare-cell center"><span class="cross">✗</span></div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell" style="color:var(--text);">Weekly progressive calorie adjustment</div>
+          <div class="compare-cell center attune-col"><span class="check">✓</span></div>
+          <div class="compare-cell center"><span class="cross">✗</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: Results -->
+  <div class="slide" id="slide-5">
+    <div class="bg-grid"></div>
+    <div style="position:absolute;width:500px;height:500px;background:radial-gradient(ellipse,rgba(201,169,110,0.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+    <div class="s6-inner">
+      <div class="slide-label">What Coaches Say</div>
+      <div class="quote-mark">"</div>
+      <div class="quote-text">
+        My clients finally understand <em>why</em> some weeks feel harder. Attune gives them the science and me the data. I've never had retention like this.
+      </div>
+      <div class="quote-author">
+        <div class="quote-name">Coach · Dubai</div>
+        <div class="quote-role">Women's Health & Fitness Specialist</div>
+      </div>
+
+      <div style="width:100%;height:1px;background:var(--border);"></div>
+
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-num">35+</div>
+          <div class="stat-label">Target age group<br>underserved by fitness apps</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Health conditions<br>with AI-adapted protocols</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">AI</div>
+          <div class="stat-label">Powered by Claude<br>the most advanced AI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: CTA -->
+  <div class="slide" id="slide-6">
+    <div class="bg-grid"></div>
+    <div style="position:absolute;width:700px;height:700px;background:radial-gradient(ellipse,rgba(201,169,110,0.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+
+    <!-- Gold horizontal lines -->
+    <div style="position:absolute;top:25%;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.15),transparent);"></div>
+    <div style="position:absolute;bottom:25%;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.15),transparent);"></div>
+
+    <div class="s7-inner">
+      <div class="slide-label">Ready to transform your coaching?</div>
+      <h2 class="s7-title">
+        Give your clients<br>
+        <em>the edge.</em>
+      </h2>
+      <p class="s7-sub">
+        Join the first wave of coaches using hormone-intelligent AI to deliver results that generic platforms simply cannot match.
+      </p>
+      <div class="cta-group">
+        <a href="https://calendly.com" class="cta-primary" target="_blank">
+          Book a Discovery Call →
+        </a>
+        <a href="https://attuneapp.io" class="cta-secondary" target="_blank">
+          Learn More
+        </a>
+      </div>
+      <div class="s7-url">attuneapp.io</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav" id="nav"></div>
+<div class="nav-arrows">
+  <div class="nav-arrow" id="prevBtn">↑</div>
+  <div class="nav-arrow" id="nextBtn">↓</div>
+</div>
+
+<script>
+  const totalSlides = 7;
+  let current = 0;
+
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    cursorRing.style.left = e.clientX + 'px';
+    cursorRing.style.top = e.clientY + 'px';
+  });
+
+  // Nav dots
+  const nav = document.getElementById('nav');
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    nav.appendChild(dot);
+  }
+
+  function goTo(n) {
+    if (n < 0 || n >= totalSlides) return;
+    document.getElementById('slide-' + current).classList.remove('active');
+    current = n;
+    document.getElementById('slide-' + current).classList.add('active');
+    document.querySelectorAll('.nav-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+    document.getElementById('slideCounter').textContent =
+      String(current + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
+    document.getElementById('progressBar').style.width =
+      ((current + 1) / totalSlides * 100) + '%';
+  }
+
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
+  });
+
+  // Touch/swipe
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+  document.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+  });
+
+  // Scroll
+  let scrollCooldown = false;
+  document.addEventListener('wheel', e => {
+    if (scrollCooldown) return;
+    scrollCooldown = true;
+    e.deltaY > 0 ? goTo(current + 1) : goTo(current - 1);
+    setTimeout(() => scrollCooldown = false, 900);
+  });
+
+  goTo(0);
+</script>
+</body>
+</html>
