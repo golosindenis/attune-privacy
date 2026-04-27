@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Attune</title>
+<meta name="description" content="Attune privacy policy — how we collect, use, and protect your data.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #FF4D6A;
+  --gold: #C9A96E;
+  --bg: #07050A;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0EBF4;
+  --muted: #7A6E80;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+  background: rgba(7,5,10,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 5px;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--pink); }
+.nav-back {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--text); }
+
+.hero-bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255,77,106,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 140px 24px 100px;
+}
+
+.page-eyebrow {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--pink);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.page-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.page-title em { font-style: italic; color: var(--pink); }
+
+.page-meta {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 60px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section {
+  margin-bottom: 48px;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 14px;
+  padding-top: 8px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+
+p strong { color: var(--text); font-weight: 400; }
+
+ul {
+  list-style: none;
+  margin-bottom: 14px;
+}
+
+ul li {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--muted);
+  font-weight: 300;
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--pink);
+  opacity: 0.5;
+}
+
+a {
+  color: var(--pink);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+.highlight-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 14px;
+}
+.highlight-box p { margin-bottom: 0; }
+
+footer {
+  padding: 48px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 4px;
+  color: var(--text);
+  opacity: 0.6;
+  text-decoration: none;
+}
+.footer-logo span { color: var(--pink); }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); }
+.footer-copy { font-size: 12px; color: var(--muted); opacity: 0.5; }
+
+@media (max-width: 768px) {
+  nav { padding: 20px 24px; }
+  .container { padding: 120px 20px 80px; }
+  footer { flex-direction: column; align-items: flex-start; padding: 36px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+
+<nav>
+  <a href="/" class="nav-logo">ATT<span>U</span>NE</a>
+  <a href="/" class="nav-back">← Back to home</a>
+</nav>
+
+<div class="container">
+
+  <span class="page-eyebrow">Legal</span>
+  <h1 class="page-title">Privacy <em>Policy</em></h1>
+  <p class="page-meta">Last updated: April 2026 &nbsp;·&nbsp; Attune by DG Fitness and Lifestyle</p>
+
+  <div class="section">
+    <div class="highlight-box">
+      <p>Attune is a hormone-intelligent fitness app. Because we handle sensitive health data including menstrual cycle information, health conditions, and biometric data, we take your privacy seriously. This policy explains clearly what we collect, why, and how we protect it.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>1. Who we are</h2>
+    <p>Attune is developed and operated by DG Fitness and Lifestyle. If you have any questions about this policy, you can contact us at <a href="mailto:support@attuneapp.io">support@attuneapp.io</a>.</p>
+  </div>
+
+  <div class="section">
+    <h2>2. What data we collect</h2>
+    <p>We collect the following categories of information when you use Attune:</p>
+
+    <p><strong>Account information</strong></p>
+    <ul>
+      <li>Name and email address</li>
+      <li>Password (stored encrypted, never readable by us)</li>
+    </ul>
+
+    <p><strong>Health and fitness data</strong></p>
+    <ul>
+      <li>Age, height, weight, and fitness goals</li>
+      <li>Menstrual cycle data — last period date, cycle length, period length</li>
+      <li>Health conditions you choose to disclose (PCOS, hypothyroidism, endometriosis, perimenopause, GLP-1 medication)</li>
+      <li>Daily check-in data — sleep quality, sleep hours, energy levels, stress levels, mood, and symptoms</li>
+      <li>Training preferences — experience level, equipment, training days, muscle priorities</li>
+      <li>Nutrition preferences — dietary approach, food intolerances, disliked foods</li>
+      <li>Workout logs — exercises completed, sets, reps, and weights</li>
+      <li>Body photos (if you choose to upload them for AI analysis)</li>
+      <li>Bloodwork data (if you choose to upload for AI analysis)</li>
+    </ul>
+
+    <p><strong>Usage data</strong></p>
+    <ul>
+      <li>App interactions tracked via Amplitude analytics (anonymised)</li>
+      <li>Crash reports via Sentry (no personal health data included)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>3. Why we collect this data</h2>
+    <p>All data we collect is used exclusively to provide and improve the Attune service:</p>
+    <ul>
+      <li>To generate your personalised workout and nutrition plans via Claude AI</li>
+      <li>To calculate your daily readiness score and adapt session intensity</li>
+      <li>To track your cycle phase and provide hormone-contextual guidance</li>
+      <li>To adapt your programme around your health conditions</li>
+      <li>To remember your progress and improve plan quality over time</li>
+      <li>To provide AI-powered bloodwork and body composition insights</li>
+    </ul>
+    <p>We do not use your data for advertising. We do not sell your data to third parties.</p>
+  </div>
+
+  <div class="section">
+    <h2>4. AI processing</h2>
+    <p>Attune uses <strong>Claude AI by Anthropic</strong> to generate your workout plans, meal plans, and health insights. When generating your plans, relevant profile information is sent to Anthropic's API. Anthropic processes this data in accordance with their privacy policy and does not use it to train their models.</p>
+    <p>Nutrition data is verified using the <strong>FatSecret Platform API</strong>. Food item lookups are sent to FatSecret to retrieve accurate macro information. No personally identifiable information is shared with FatSecret.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. Data storage and security</h2>
+    <p>Your data is stored securely using <strong>Supabase</strong>, hosted on AWS infrastructure in the ap-northeast-2 (Seoul) region. We use industry-standard encryption for data in transit (TLS) and at rest.</p>
+    <p>Subscription and payment processing is handled by <strong>RevenueCat</strong> and <strong>Apple</strong>. We never see or store your payment card details.</p>
+  </div>
+
+  <div class="section">
+    <h2>6. Data sharing</h2>
+    <p>We share your data only with the following service providers, and only to the extent necessary to operate the app:</p>
+    <ul>
+      <li><strong>Anthropic</strong> — AI plan generation (health profile data)</li>
+      <li><strong>Supabase</strong> — database and file storage</li>
+      <li><strong>RevenueCat</strong> — subscription management (email only)</li>
+      <li><strong>Amplitude</strong> — anonymised usage analytics</li>
+      <li><strong>Sentry</strong> — crash monitoring (no health data)</li>
+      <li><strong>FatSecret</strong> — food macro verification (food names only, no personal data)</li>
+    </ul>
+    <p>We do not share your data with any other third parties, advertisers, or data brokers.</p>
+  </div>
+
+  <div class="section">
+    <h2>7. Sensitive health data</h2>
+    <p>Attune handles sensitive health information including menstrual cycle data and health conditions. This data is:</p>
+    <ul>
+      <li>Never sold or shared with advertisers</li>
+      <li>Never used to profile you for external purposes</li>
+      <li>Only used within the app to personalise your fitness and nutrition guidance</li>
+      <li>Stored encrypted and accessible only to you and our core infrastructure</li>
+    </ul>
+    <div class="highlight-box">
+      <p>Attune is not a medical service. The health insights provided are for fitness and wellness guidance only and do not constitute medical advice. Always consult a qualified healthcare provider for medical decisions.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>8. Your rights</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>Access all data we hold about you</li>
+      <li>Request correction of inaccurate data</li>
+      <li>Request deletion of your account and all associated data</li>
+      <li>Export your data in a portable format</li>
+      <li>Withdraw consent for data processing at any time</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at <a href="mailto:support@attuneapp.io">support@attuneapp.io</a> or use the Delete Account option in the app under Profile.</p>
+  </div>
+
+  <div class="section">
+    <h2>9. Data retention</h2>
+    <p>We retain your data for as long as your account is active. If you delete your account, all personal data is permanently deleted within 30 days. Anonymised aggregate analytics data may be retained longer.</p>
+  </div>
+
+  <div class="section">
+    <h2>10. Children</h2>
+    <p>Attune is designed for women 35 and older. We do not knowingly collect data from anyone under 18. If you believe a minor has created an account, please contact us immediately.</p>
+  </div>
+
+  <div class="section">
+    <h2>11. Changes to this policy</h2>
+    <p>We may update this privacy policy from time to time. When we do, we will update the date at the top of this page. For significant changes, we will notify you within the app.</p>
+  </div>
+
+  <div class="section">
+    <h2>12. Contact</h2>
+    <p>For any privacy-related questions or requests, contact us at <a href="mailto:support@attuneapp.io">support@attuneapp.io</a>.</p>
+  </div>
+
+</div>
+
+<footer>
+  <a href="/" class="footer-logo">ATT<span>U</span>NE</a>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/#how-it-works">How it works</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="mailto:hello@attuneapp.io">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Attune. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
