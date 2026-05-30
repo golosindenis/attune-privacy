@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attune × WHOOP Integration</title>
+<meta name="description" content="See how Attune integrates with WHOOP to sync recovery, HRV, sleep and strain data into your hormone-intelligent training programme.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #FF4D6A;
+  --whoop: #FFB347;
+  --bg: #07050A;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0EBF4;
+  --muted: #7A6E80;
+  --glow: rgba(255,77,106,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Nav */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+  background: rgba(7,5,10,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 5px;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--pink); }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--pink);
+  color: #fff !important;
+  padding: 10px 22px;
+  border-radius: 24px;
+  font-size: 13px !important;
+  font-weight: 500;
+}
+
+/* Hero */
+.hero {
+  padding: 160px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% -10%, rgba(255,179,71,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 60%, rgba(255,77,106,0.06) 0%, transparent 50%);
+}
+.hero-content { position: relative; z-index: 2; max-width: 760px; margin: 0 auto; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--whoop);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  padding: 8px 18px;
+  border: 1px solid rgba(255,179,71,0.3);
+  border-radius: 24px;
+  background: rgba(255,179,71,0.06);
+}
+.whoop-w {
+  width: 22px; height: 22px;
+  background: #000;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff;
+  letter-spacing: 0;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 6vw, 80px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 24px;
+}
+.hero-title em { font-style: italic; color: var(--whoop); }
+
+.hero-sub {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 0 auto 48px;
+  font-weight: 300;
+}
+
+/* Section layout */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.section-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--whoop);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.section-title em { font-style: italic; color: var(--pink); }
+
+.section-sub {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 540px;
+  font-weight: 300;
+}
+
+/* How it works steps */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 48px;
+}
+.step-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--whoop), transparent);
+}
+.step-num {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--whoop);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.step-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.step-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Data metrics grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+.metric-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.metric-icon { font-size: 24px; }
+.metric-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+.metric-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.metric-used {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--whoop);
+  margin-top: 4px;
+}
+
+/* Screenshots section */
+.screenshots-section {
+  background: rgba(255,255,255,0.02);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 24px;
+}
+.screenshots-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.screenshots-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-top: 48px;
+}
+@media (max-width: 640px) {
+  .screenshots-grid { grid-template-columns: 1fr; }
+}
+.screenshot-item { display: flex; flex-direction: column; gap: 16px; }
+.screenshot-img-wrap {
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #111;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+}
+.screenshot-img-wrap img {
+  width: 100%;
+  display: block;
+}
+.screenshot-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+.screenshot-caption {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Privacy card */
+.privacy-card {
+  background: rgba(255,179,71,0.04);
+  border: 1px solid rgba(255,179,71,0.15);
+  border-radius: 20px;
+  padding: 32px;
+  margin-top: 48px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.privacy-icon { font-size: 28px; flex-shrink: 0; }
+.privacy-title { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
+.privacy-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 5px;
+  color: var(--text);
+  text-decoration: none;
+}
+.footer-logo span { color: var(--pink); }
+.footer-text { font-size: 12px; color: var(--muted); }
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: var(--border);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+  footer { padding: 32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">ATT<span>U</span>NE</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/#features">Features</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="https://apps.apple.com/app/attune/id6744368628" class="nav-cta" target="_blank">Download</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="badge">
+      <span class="whoop-w">W</span>
+      WHOOP Integration
+    </div>
+    <h1 class="hero-title">
+      Your WHOOP data,<br>
+      <em>intelligently applied</em>
+    </h1>
+    <p class="hero-sub">
+      Attune connects directly to your WHOOP strap to sync recovery, HRV, sleep and strain — then uses that data to adapt your training to exactly where your body is today.
+    </p>
+  </div>
+</section>
+
+<!-- How it works -->
+<div class="section">
+  <p class="section-label">How it works</p>
+  <h2 class="section-title">From WHOOP to <em>workout</em></h2>
+  <p class="section-sub">Three steps from connection to a fully adapted training session.</p>
+
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-num">01 — CONNECT</div>
+      <div class="step-title">OAuth authorisation</div>
+      <div class="step-desc">Users connect their WHOOP account directly inside Attune via secure OAuth 2.0. No password sharing. Tokens are stored encrypted in Supabase and never exposed to the client.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02 — SYNC</div>
+      <div class="step-title">Daily background sync</div>
+      <div class="step-desc">Every time the app opens or comes to the foreground, Attune silently fetches the latest WHOOP recovery cycle, sleep performance and HRV. A 15-minute cooldown prevents unnecessary API calls.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03 — ADAPT</div>
+      <div class="step-title">Hormone-aware readiness</div>
+      <div class="step-desc">WHOOP recovery data is combined with the user's menstrual cycle phase and daily check-in to produce a composite readiness score. The AI coach uses this score to modify intensity, volume and session type in real time.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Data used -->
+<div class="section">
+  <p class="section-label">Data fields</p>
+  <h2 class="section-title">What Attune reads <em>from WHOOP</em></h2>
+  <p class="section-sub">Every metric has a specific purpose inside the app — nothing is collected that is not actively used.</p>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-icon">⚡</div>
+      <div class="metric-name">Recovery Score</div>
+      <div class="metric-desc">WHOOP's composite daily readiness score (0–100%).</div>
+      <div class="metric-used">Used to set training intensity</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">📡</div>
+      <div class="metric-name">HRV</div>
+      <div class="metric-desc">Heart rate variability in milliseconds from overnight measurement.</div>
+      <div class="metric-used">Modifies readiness score + stress estimate</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">❤️</div>
+      <div class="metric-name">Resting Heart Rate</div>
+      <div class="metric-desc">Average resting HR from sleep period.</div>
+      <div class="metric-used">Displayed in Activity dashboard</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">🌙</div>
+      <div class="metric-name">Sleep Performance</div>
+      <div class="metric-desc">WHOOP sleep score and total sleep duration.</div>
+      <div class="metric-used">Feeds sleep component of readiness</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">🔥</div>
+      <div class="metric-name">Day Strain</div>
+      <div class="metric-desc">Cardiovascular load accumulated during the day (0–21 scale).</div>
+      <div class="metric-used">Shown in progress dashboard</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Screenshots -->
+<section class="screenshots-section">
+  <div class="screenshots-inner">
+    <p class="section-label">UX walkthrough</p>
+    <h2 class="section-title">Inside the <em>integration</em></h2>
+    <p class="section-sub">How users see and interact with WHOOP data inside Attune.</p>
+
+    <div class="screenshots-grid">
+      <div class="screenshot-item">
+        <div class="screenshot-img-wrap">
+          <img src="whoop-screen-1.jpg" alt="Attune Progress screen showing WHOOP connected and readiness trend chart" />
+        </div>
+        <div class="screenshot-label">Progress dashboard — WHOOP connected</div>
+        <div class="screenshot-caption">The Progress tab shows WHOOP connection status and a 30-day readiness trend chart overlaid with cycle phase bands (menstrual, follicular, ovulatory, luteal). Users can see how their WHOOP recovery correlates with their hormonal cycle.</div>
+      </div>
+      <div class="screenshot-item">
+        <div class="screenshot-img-wrap">
+          <img src="whoop-screen-2.jpg" alt="Attune Integrations modal showing WHOOP connected alongside Apple Watch and Oura Ring" />
+        </div>
+        <div class="screenshot-label">Integrations modal — device management</div>
+        <div class="screenshot-caption">Users manage their wearable connection from the Integrations screen. Only one device can be active at a time to ensure clean, conflict-free data. Tapping the Connected badge disconnects the device and revokes the OAuth token.</div>
+      </div>
+    </div>
+
+    <div class="privacy-card">
+      <div class="privacy-icon">🔒</div>
+      <div>
+        <div class="privacy-title">Privacy by design</div>
+        <div class="privacy-text">
+          WHOOP OAuth tokens are stored server-side in Supabase with row-level security — only the authenticated user can access their own tokens. Health data is never sold, shared with third parties, or used for advertising. It is used exclusively to personalise the user's training programme within Attune. Users can disconnect WHOOP at any time, which immediately revokes the OAuth token and removes all stored credentials.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Attune -->
+<div class="section">
+  <p class="section-label">About Attune</p>
+  <h2 class="section-title">Hormone-intelligent training <em>for women 35+</em></h2>
+  <p class="section-sub" style="max-width: 680px;">
+    Attune is the first fitness app built around the female hormonal cycle. Where most fitness apps treat all days the same, Attune adapts workouts, nutrition and recovery recommendations to where a woman is in her cycle — follicular, ovulatory, luteal or menstrual. WHOOP integration makes this adaptation even more precise by adding real-time physiological data on top of cycle-phase awareness, producing a readiness score that reflects both hormonal state and actual recovery quality.
+  </p>
+</div>
+
+<footer>
+  <a href="/" class="footer-logo">ATT<span>U</span>NE</a>
+  <span class="footer-text">© 2025 Attune. All rights reserved.</span>
+  <a href="/privacy.html" style="font-size:12px; color: var(--muted); text-decoration:none;">Privacy Policy</a>
+</footer>
+
+</body>
+</html>
