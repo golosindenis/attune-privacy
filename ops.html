@@ -387,6 +387,9 @@
   .error-level { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
   .error-users { font-size: 11px; color: var(--muted); }
   .error-time { font-size: 11px; color: var(--muted2); margin-left: auto; }
+  .resolve-btn { margin-left: 10px; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: var(--green); background: rgba(0,229,160,0.10); border: 1px solid rgba(0,229,160,0.25); border-radius: 6px; padding: 3px 10px; cursor: pointer; transition: all 0.15s; }
+  .resolve-btn:hover { background: rgba(0,229,160,0.20); }
+  .resolve-btn:disabled { opacity: 0.5; cursor: default; }
 
   .skeleton {
     background: linear-gradient(90deg, var(--bg3) 25%, var(--bg4) 50%, var(--bg3) 75%);
@@ -633,6 +636,27 @@
     }
   }
 
+  async function resolveIssue(issueId, btn) {
+    if (!confirm('Mark this Sentry issue resolved?')) return
+    btn.textContent = '...'
+    btn.disabled = true
+    try {
+      const res = await fetch(EDGE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: savedPassword, action: 'resolve_sentry', issueId })
+      })
+      const data = await res.json()
+      if (!res.ok || data.error) throw new Error(data.error || ('Error ' + res.status))
+      btn.textContent = 'Resolved'
+      loadData()
+    } catch (err) {
+      alert('Resolve failed: ' + err.message)
+      btn.textContent = 'Resolve'
+      btn.disabled = false
+    }
+  }
+
   async function loadData() {
     try {
       const res = await fetch(EDGE_URL, {
@@ -791,6 +815,7 @@
               <span class="error-level">${escHtml(e.level || '')}</span>
               <span class="error-users">${e.userCount ?? 0} ${e.userCount === 1 ? 'user' : 'users'}</span>
               <span class="error-time">${timeAgo(e.lastSeen)} &#8599;</span>
+              <button class="resolve-btn" onclick="event.preventDefault(); event.stopPropagation(); resolveIssue('${e.id}', this)">Resolve</button>
             </div>
           </a>
         `).join('')
