@@ -378,12 +378,14 @@
   .panel-row-value.gold { color: var(--gold); }
   .panel-row-value.blue { color: var(--blue); }
 
-  .error-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .error-item { display: block; padding: 12px 8px; margin: 0 -8px; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; border-radius: 8px; transition: background 0.15s; cursor: pointer; }
+  .error-item:hover { background: var(--bg3); }
   .error-item:last-child { border-bottom: none; }
   .error-title { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--text); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .error-meta { display: flex; align-items: center; gap: 10px; }
   .error-count { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--pink); background: rgba(255,77,106,0.10); padding: 2px 8px; border-radius: 5px; }
   .error-level { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .error-users { font-size: 11px; color: var(--muted); }
   .error-time { font-size: 11px; color: var(--muted2); margin-left: auto; }
 
   .skeleton {
@@ -442,26 +444,26 @@
     <!-- OVERVIEW ROW -->
     <div class="overview-row">
       <div class="stat-card pink">
-        <div class="stat-label">Total Users</div>
-        <div class="stat-value pink" id="totalUsers"><div class="skeleton"></div></div>
-        <div class="stat-sub">All time signups</div>
+        <div class="stat-label">Active Users</div>
+        <div class="stat-value pink" id="activeUsers"><div class="skeleton"></div></div>
+        <div class="stat-sub" id="activeUsersSub">Checked in last 14 days</div>
         <div class="stat-badge up" id="newUsersWeekBadge"></div>
       </div>
       <div class="stat-card green">
         <div class="stat-label">Active Subscribers</div>
         <div class="stat-value green" id="activeSubscribers"><div class="skeleton"></div></div>
-        <div class="stat-sub">Paying users right now</div>
-        <div class="stat-badge up" id="activeTrialsBadge"></div>
+        <div class="stat-sub">Paying right now</div>
+        <div class="stat-badge neutral" id="activeTrialsBadge"></div>
       </div>
       <div class="stat-card gold">
-        <div class="stat-label">MRR</div>
-        <div class="stat-value gold" id="mrr"><div class="skeleton"></div></div>
-        <div class="stat-sub">Monthly recurring revenue</div>
+        <div class="stat-label">Claude Spend (30d est)</div>
+        <div class="stat-value gold" id="claudeSpend"><div class="skeleton"></div></div>
+        <div class="stat-sub" id="claudeSpendSub">Plan generation estimate</div>
       </div>
       <div class="stat-card blue">
-        <div class="stat-label">Crashes Today</div>
-        <div class="stat-value blue" id="crashesToday"><div class="skeleton"></div></div>
-        <div class="stat-sub">New Sentry issues 24h</div>
+        <div class="stat-label">Unresolved Crashes</div>
+        <div class="stat-value blue" id="unresolvedCrashes"><div class="skeleton"></div></div>
+        <div class="stat-sub" id="crashesSub">New in last 24h</div>
       </div>
     </div>
 
@@ -508,6 +510,14 @@
             <div class="panel-row-value green" id="sb-totalUsers">...</div>
           </div>
           <div class="panel-row">
+            <div class="panel-row-label">Active users (14d)</div>
+            <div class="panel-row-value green" id="sb-activeUsers">...</div>
+          </div>
+          <div class="panel-row">
+            <div class="panel-row-label">Dormant (no check-in 14d)</div>
+            <div class="panel-row-value gold" id="sb-dormant">...</div>
+          </div>
+          <div class="panel-row">
             <div class="panel-row-label">New signups today</div>
             <div class="panel-row-value green" id="sb-newUsersToday">...</div>
           </div>
@@ -524,8 +534,8 @@
             <div class="panel-row-value green" id="sb-checkinsTotal">...</div>
           </div>
           <div class="panel-row">
-            <div class="panel-row-label">Workout plans generated</div>
-            <div class="panel-row-value green" id="sb-workoutPlans">...</div>
+            <div class="panel-row-label">Plan generations (30d)</div>
+            <div class="panel-row-value green" id="sb-planGens">...</div>
           </div>
         </div>
       </div>
@@ -548,16 +558,12 @@
             <div class="panel-row-value pink" id="rc-trials">...</div>
           </div>
           <div class="panel-row">
-            <div class="panel-row-label">MRR</div>
-            <div class="panel-row-value pink" id="rc-mrr">...</div>
+            <div class="panel-row-label">Trial / paid split</div>
+            <div class="panel-row-value pink" id="rc-split">...</div>
           </div>
           <div class="panel-row">
-            <div class="panel-row-label">Revenue last 28 days</div>
-            <div class="panel-row-value pink" id="rc-revenue">...</div>
-          </div>
-          <div class="panel-row">
-            <div class="panel-row-label">New customers last 28d</div>
-            <div class="panel-row-value pink" id="rc-newCustomers">...</div>
+            <div class="panel-row-label">Total customers (all time)</div>
+            <div class="panel-row-value pink" id="rc-totalCustomers">...</div>
           </div>
         </div>
       </div>
@@ -620,7 +626,7 @@
       document.getElementById('gate').style.display = 'none'
       document.getElementById('dashboard').style.display = 'block'
       renderData(data)
-      setInterval(loadData, 5 * 60 * 1000)
+      setInterval(loadData, 60 * 1000)
     } catch (err) {
       errorEl.textContent = 'Connection error. Try again.'
       errorEl.style.display = 'block'
@@ -725,68 +731,79 @@
     document.getElementById('lastUpdated').textContent = `Updated ${time}`
 
     if (supabase && !supabase.error) {
-      set('totalUsers', supabase.totalUsers ?? 0)
+      set('activeUsers', supabase.activeUsers ?? 0)
+      set('activeUsersSub', `of ${supabase.onboardedUsers ?? 0} onboarded · ${supabase.dormantUsers ?? 0} dormant`)
       set('sb-totalUsers', supabase.totalUsers ?? 0)
+      set('sb-activeUsers', supabase.activeUsers ?? 0)
+      set('sb-dormant', supabase.dormantUsers ?? 0)
       set('sb-newUsersToday', supabase.newUsersToday ?? 0)
       set('sb-newUsersWeek', supabase.newUsersWeek ?? 0)
       set('sb-checkinsToday', supabase.checkinsToday ?? 0)
       set('sb-checkinsTotal', supabase.checkinsTotal ?? 0)
-      set('sb-workoutPlans', supabase.workoutPlans ?? 0)
+      set('sb-planGens', supabase.planGenerations30d ?? 0)
+
+      set('claudeSpend', '$' + Number(supabase.claudeSpendEst30d ?? 0).toFixed(2))
+      set('claudeSpendSub', `~${supabase.planGenerations30d ?? 0} plan generations (est)`)
 
       const weekBadge = document.getElementById('newUsersWeekBadge')
-      weekBadge.textContent = `+${supabase.newUsersWeek ?? 0} this week`
+      weekBadge.textContent = `+${supabase.newUsersWeek ?? 0} new this week`
       weekBadge.className = 'stat-badge up'
 
+      document.getElementById('supabaseStatus').textContent = 'live'
       renderCalendar(supabase.dailyActivity)
     } else {
       document.getElementById('supabaseStatus').textContent = 'error'
     }
 
     if (revenuecat && !revenuecat.error) {
-      set('activeSubscribers', revenuecat.activeSubscriptions ?? 0)
-      set('mrr', '$' + (revenuecat.mrr ?? 0).toFixed ? '$' + Number(revenuecat.mrr ?? 0).toFixed(2) : revenuecat.mrr)
-      set('rc-active', revenuecat.activeSubscriptions ?? 0)
-      set('rc-trials', revenuecat.activeTrials ?? 0)
-      set('rc-mrr', revenuecat.mrr === '—' ? '—' : '$' + Number(revenuecat.mrr ?? 0).toFixed(2))
-      set('rc-revenue', revenuecat.revenue28d === '—' ? '—' : '$' + Number(revenuecat.revenue28d ?? 0).toFixed(2))
-      set('rc-newCustomers', revenuecat.newCustomers28d ?? 0)
+      const paid = revenuecat.activeSubscriptions ?? 0
+      const trials = revenuecat.activeTrials ?? 0
+      set('activeSubscribers', paid)
+      set('rc-active', paid)
+      set('rc-trials', trials)
+      set('rc-split', `${trials} trial / ${paid} paid`)
+      set('rc-totalCustomers', revenuecat.totalCustomers ?? 0)
 
       const trialsBadge = document.getElementById('activeTrialsBadge')
-      trialsBadge.textContent = `${revenuecat.activeTrials ?? 0} on trial`
+      trialsBadge.textContent = `${trials} on trial`
       trialsBadge.className = 'stat-badge neutral'
+      document.getElementById('rcStatus').textContent = 'live'
     } else {
       document.getElementById('rcStatus').textContent = 'error'
       set('activeSubscribers', 'err')
-      set('mrr', 'err')
+      set('rc-active', 'err'); set('rc-trials', 'err'); set('rc-split', '—'); set('rc-totalCustomers', '—')
     }
 
     if (sentry && !sentry.error) {
-      set('crashesToday', sentry.newIssues24h ?? 0)
+      set('unresolvedCrashes', sentry.unresolvedCount ?? 0)
+      set('crashesSub', `${sentry.newIssues24h ?? 0} new in last 24h`)
       set('sentry-unresolved', sentry.unresolvedCount ?? 0)
       set('sentry-new24h', sentry.newIssues24h ?? 0)
+      document.getElementById('sentryStatus').textContent = 'live'
 
       const errorsEl = document.getElementById('sentry-errors')
       if (sentry.topErrors && sentry.topErrors.length > 0) {
         errorsEl.innerHTML = sentry.topErrors.map(e => `
-          <div class="error-item">
+          <a class="error-item" href="${e.permalink || '#'}" target="_blank" rel="noopener">
             <div class="error-title">${escHtml(e.title)}</div>
             <div class="error-meta">
               <span class="error-count">${e.count} events</span>
-              <span class="error-level">${e.level}</span>
-              <span class="error-time">${timeAgo(e.lastSeen)}</span>
+              <span class="error-level">${escHtml(e.level || '')}</span>
+              <span class="error-users">${e.userCount ?? 0} ${e.userCount === 1 ? 'user' : 'users'}</span>
+              <span class="error-time">${timeAgo(e.lastSeen)} &#8599;</span>
             </div>
-          </div>
+          </a>
         `).join('')
       } else {
         errorsEl.innerHTML = '<div style="font-size:13px;color:var(--green);padding:8px 0;">No unresolved issues</div>'
       }
     } else {
       document.getElementById('sentryStatus').textContent = 'error'
-      set('crashesToday', 'err')
+      set('unresolvedCrashes', 'err')
       set('sentry-unresolved', 'err')
       set('sentry-new24h', 'err')
       const errorsEl = document.getElementById('sentry-errors')
-      errorsEl.innerHTML = `<div style="font-size:12px;color:var(--pink);padding:8px 0;">${sentry?.error || 'Failed to load'}</div>`
+      errorsEl.innerHTML = `<div style="font-size:12px;color:var(--pink);padding:8px 0;">${escHtml(sentry?.error || 'Failed to load')}</div>`
     }
   }
 
