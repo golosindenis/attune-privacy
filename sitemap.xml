@@ -15,4 +15,16 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url><loc>https://attuneapp.io/pcos-breakfast-fix</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://attuneapp.io/3-lifts-pcos</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://attuneapp.io/5-signs-insulin-resistance</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://attuneapp.io/glp1-muscle-preservation</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://attuneapp.io/3-daily-habits-pcos</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://attuneapp.io/pcos-fertility</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://attuneapp.io/247am-wakeup</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://attuneapp.io/glp1-muscle-protocol</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://attuneapp.io/4-lifts-cardio-ir</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://attuneapp.io/lab-panel</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://attuneapp.io/pcos-and-thyroid</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://attuneapp.io/glp1-snack-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
