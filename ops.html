@@ -572,6 +572,11 @@
             <div class="panel-row-label">Total customers (all time)</div>
             <div class="panel-row-value pink" id="rc-totalCustomers">...</div>
           </div>
+          <div class="panel-row">
+            <div class="panel-row-label">Set to cancel</div>
+            <div class="panel-row-value pink" id="rc-atRiskCount">...</div>
+          </div>
+          <div id="rc-at-risk"></div>
         </div>
       </div>
 
@@ -826,6 +831,22 @@
       set('rc-trials', trials)
       set('rc-split', `${trials} trial / ${paid} paid`)
       set('rc-totalCustomers', revenuecat.totalCustomers ?? 0)
+
+      const atRisk = revenuecat.atRisk ?? []
+      set('rc-atRiskCount', atRisk.length)
+      const arEl = document.getElementById('rc-at-risk')
+      if (arEl) {
+        arEl.innerHTML = atRisk.length === 0
+          ? '<div class="panel-row"><div class="panel-row-value">Nobody is set to cancel</div></div>'
+          : atRisk.map(function (r) {
+              var ends = r.expires_at ? String(r.expires_at).slice(0, 10) : 'unknown'
+              var kind = r.is_trial ? 'trial ends' : 'access ends'
+              return '<div class="panel-row"><div class="panel-row-label">' +
+                r.first_name + '</div><div class="panel-row-value">' +
+                r.checkins + ' check-ins, ' + r.days_since_signup + 'd old, ' +
+                kind + ' ' + ends + '</div></div>'
+            }).join('')
+      }
 
       const trialsBadge = document.getElementById('activeTrialsBadge')
       trialsBadge.textContent = `${trials} on trial`
