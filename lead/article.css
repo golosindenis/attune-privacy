@@ -1,0 +1,88 @@
+/* Article layer for the guide pages.
+   Kept separate from lead.css on purpose: every one of the 14 magnet pages loads
+   lead.css, so editing it to suit one page risks all of them. This file only ever
+   adds, and a page that does not load it renders exactly as before. */
+
+.art{max-width:720px;margin:0 auto}
+.art-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:12.5px;color:var(--muted);margin-bottom:34px}
+.art-meta .art-dot{opacity:0.5}
+.art-body{font-size:17px;line-height:1.72;color:#CFC6D6}
+.art-body>*+*{margin-top:22px}
+.art-body h2{
+  font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--text);
+  font-size:clamp(26px,3.4vw,33px);line-height:1.18;letter-spacing:-0.3px;
+  margin-top:52px;margin-bottom:0;
+}
+.art-body h3{
+  font-family:'Outfit',sans-serif;font-weight:600;color:var(--text);
+  font-size:18px;line-height:1.35;margin-top:34px;margin-bottom:0;
+}
+.art-body strong{color:var(--text);font-weight:500}
+.art-body a{color:var(--pink-soft);text-decoration:none;border-bottom:1px solid rgba(255,107,131,0.35)}
+.art-body a:hover{border-bottom-color:var(--pink-soft)}
+.art-body ul,.art-body ol{padding-left:2px;list-style:none;display:flex;flex-direction:column;gap:13px}
+.art-body ul li{position:relative;padding-left:22px}
+.art-body ul li::before{
+  content:'';position:absolute;left:2px;top:10px;width:6px;height:6px;
+  border-radius:50%;background:var(--pink);opacity:0.8;
+}
+.art-body ol{counter-reset:art}
+.art-body ol li{position:relative;padding-left:30px;counter-increment:art}
+.art-body ol li::before{
+  content:counter(art);position:absolute;left:0;top:0;
+  font-size:13px;font-weight:600;color:var(--pink);font-variant-numeric:tabular-nums;
+}
+
+/* Pull quote for the one line per page worth slowing down for. */
+.art-pull{
+  border-left:2px solid var(--pink);padding:4px 0 4px 22px;margin-top:38px;
+  font-family:'Cormorant Garamond',serif;font-size:clamp(21px,2.8vw,26px);
+  line-height:1.35;color:var(--text);
+}
+
+/* Inline offer. The article answers the question for free and this asks for the
+   email in exchange for the deeper artifact, which is the whole point of the
+   rewrite: the answer is no longer behind the form. */
+.art-offer{
+  background:var(--card);border:1px solid var(--border);border-radius:18px;
+  padding:28px;margin-top:52px;
+}
+.art-offer .lm-eyebrow{margin-bottom:12px}
+.art-offer-title{
+  font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;
+  line-height:1.2;color:var(--text);margin-bottom:8px;
+}
+.art-offer-sub{font-size:15px;color:#CFC6D6;margin-bottom:22px}
+.art-offer form{background:none;border:none;padding:0}
+
+.art-disc{
+  margin-top:44px;padding-top:22px;border-top:1px solid var(--border);
+  font-size:12.5px;line-height:1.6;color:var(--muted);
+}
+
+/* Related reading. Kills the orphan problem: these pages had no links to each
+   other and none from the homepage, so the sitemap was their only route in. */
+.art-rel{margin-top:52px}
+.art-rel-h{
+  font-size:12px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:18px;
+}
+.art-rel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.art-rel-card{
+  display:block;text-decoration:none;background:var(--card);
+  border:1px solid var(--border);border-radius:14px;padding:18px;
+  transition:border-color 0.2s ease;
+}
+.art-rel-card:hover{border-color:rgba(255,77,106,0.4)}
+.art-rel-card b{display:block;color:var(--text);font-weight:500;font-size:15px;line-height:1.35;margin-bottom:5px}
+.art-rel-card span{color:var(--muted);font-size:13px;line-height:1.45}
+
+/* Guides index */
+.gx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:8px}
+.gx-sec{margin-top:46px}
+.gx-sec-h{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+
+@media(max-width:640px){
+  .art-body{font-size:16.5px}
+  .art-offer{padding:22px}
+}

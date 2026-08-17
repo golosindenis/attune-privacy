@@ -630,6 +630,54 @@ section { position: relative; }
 .quote-attr { font-size: 13px; color: var(--muted); letter-spacing: 1px; }
 
 /* PRICING */
+/* Guides section */
+.guides-home { padding: 140px 24px; text-align: center; }
+.guides-home-inner { max-width: 900px; margin: 0 auto; }
+.guides-home-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 60px;
+  text-align: left;
+}
+.guide-card {
+  display: block;
+  text-decoration: none;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 26px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.guide-card:hover { border-color: rgba(255,77,106,0.4); transform: translateY(-3px); }
+.guide-tag {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.guide-card b {
+  display: block;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.32;
+  color: var(--text);
+  margin-bottom: 9px;
+}
+.guide-desc { display: block; font-size: 14px; line-height: 1.55; color: var(--muted); }
+.guides-home-all {
+  display: inline-block;
+  margin-top: 44px;
+  font-size: 14px;
+  color: var(--pink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,107,131,0.35);
+  padding-bottom: 2px;
+}
+.guides-home-all:hover { border-bottom-color: var(--pink-soft); }
+
 .pricing { padding: 140px 24px; text-align: center; }
 .pricing-inner { max-width: 900px; margin: 0 auto; }
 
@@ -775,6 +823,8 @@ footer {
   .feature-row { grid-template-columns: 1fr; gap: 40px; }
   .feature-row.reverse { direction: ltr; }
   .pricing-grid { grid-template-columns: 1fr; }
+  .guides-home-grid { grid-template-columns: 1fr; }
+  .guides-home { padding: 90px 24px; }
   footer { flex-direction: column; align-items: flex-start; padding: 36px 24px; }
 }
 .faq-section { padding: 90px 24px; max-width: 780px; margin: 0 auto; }
@@ -795,7 +845,7 @@ footer {
     <a href="#how-it-works">How it works</a>
     <a href="#features">Features</a>
     <a href="#pricing">Pricing</a>
-    <a href="privacy.html">Privacy</a>
+    <a href="/guides">Guides</a>
     <a href="https://apps.apple.com/app/id6761509262" class="nav-cta" target="_blank">Download</a>
   </div>
 </nav>
@@ -1071,6 +1121,38 @@ footer {
 
 <div class="divider-line"></div>
 
+<!-- GUIDES -->
+<!-- Sits before pricing on purpose: give the answers away, then ask for money.
+     Also the only route to /guides that survives on mobile, where .nav-links is
+     display:none below 900px and the header has no links at all. -->
+<section class="guides-home" id="guides">
+  <div class="guides-home-inner">
+    <span class="eyebrow reveal">Free guides</span>
+    <h2 class="section-title reveal reveal-delay-1">Start with the <em>answers.</em></h2>
+    <p class="section-body reveal reveal-delay-2">Everything we know about PCOS, insulin resistance and GLP-1 muscle loss, written down and given away. No email required to read them.</p>
+    <div class="guides-home-grid">
+      <a class="guide-card reveal reveal-delay-1" href="/glp1-muscle-preservation">
+        <span class="guide-tag">GLP-1</span>
+        <b>How to keep your muscle on a GLP-1</b>
+        <span class="guide-desc">Roughly 40 percent of the weight lost can be lean mass. Here is how to keep it.</span>
+      </a>
+      <a class="guide-card reveal reveal-delay-2" href="/pcos-belly-fat">
+        <span class="guide-tag">PCOS</span>
+        <b>Why PCOS belly fat resists everything</b>
+        <span class="guide-desc">Why the middle holds on, and the three shifts that finally move it.</span>
+      </a>
+      <a class="guide-card reveal reveal-delay-3" href="/5-signs-insulin-resistance">
+        <span class="guide-tag">Insulin resistance</span>
+        <b>5 signs it is getting worse</b>
+        <span class="guide-desc">It rarely announces itself. It shows up as small things you learn to live with.</span>
+      </a>
+    </div>
+    <a class="guides-home-all reveal reveal-delay-3" href="/guides">See all 14 guides</a>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
 <!-- PRICING -->
 <section class="pricing" id="pricing">
   <div class="pricing-inner">
@@ -1154,6 +1236,7 @@ footer {
     <a href="#how-it-works">How it works</a>
     <a href="#features">Features</a>
     <a href="#pricing">Pricing</a>
+    <a href="/guides">Free guides</a>
     <a href="privacy.html">Privacy Policy</a>
     <a href="mailto:hello@attuneapp.io">Contact</a>
   </div>
