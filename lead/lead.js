@@ -38,6 +38,7 @@
       .then(function (res) {
         if (res.ok && res.d && res.d.ok) {
           show('Perfect. Opening your guide...', 'ok');
+          if (window.attuneTrack) window.attuneTrack('lead_submit', { magnet: magnet, page: window.location.pathname });
           window.location.href = redirect;
         } else {
           btn.disabled = false;

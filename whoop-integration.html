@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-itunes-app" content="app-id=6761509262">
 <title>Attune × WHOOP Integration</title>
 <meta name="description" content="See how Attune integrates with WHOOP to sync recovery, HRV, sleep and strain data into your hormone-intelligent training programme.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -326,10 +327,13 @@ footer {
 
 @media (max-width: 768px) {
   nav { padding: 20px 24px; }
-  .nav-links { display: none; }
+  /* Keep the Download pill on mobile, hide only the text links. */
+  .nav-links { gap: 0; }
+  .nav-links a:not(.nav-cta) { display: none; }
   footer { padding: 32px 24px; }
 }
 </style>
+<script src="/analytics.js" defer></script>
 </head>
 <body>
 
@@ -339,7 +343,7 @@ footer {
     <a href="/">Home</a>
     <a href="/#features">Features</a>
     <a href="/#pricing">Pricing</a>
-    <a href="https://apps.apple.com/app/attune/id6744368628" class="nav-cta" target="_blank">Download</a>
+    <a href="https://apps.apple.com/app/id6761509262" class="nav-cta" target="_blank" data-track-location="whoop_nav">Download</a>
   </div>
 </nav>
 
@@ -469,7 +473,7 @@ footer {
 <!-- About Attune -->
 <div class="section">
   <p class="section-label">About Attune</p>
-  <h2 class="section-title">Hormone-intelligent training <em>for women 35+</em></h2>
+  <h2 class="section-title">Hormone-intelligent training <em>for PCOS, perimenopause and GLP-1</em></h2>
   <p class="section-sub" style="max-width: 680px;">
     Attune is the first fitness app built around the female hormonal cycle. Where most fitness apps treat all days the same, Attune adapts workouts, nutrition and recovery recommendations to where a woman is in her cycle — follicular, ovulatory, luteal or menstrual. WHOOP integration makes this adaptation even more precise by adding real-time physiological data on top of cycle-phase awareness, producing a readiness score that reflects both hormonal state and actual recovery quality.
   </p>

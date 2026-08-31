@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-itunes-app" content="app-id=6761509262">
 <title>Attune: Hormone Fitness for Women, Workouts for PCOS, Perimenopause and GLP-1</title>
 <meta name="description" content="Attune is a hormone intelligent fitness app for women. Strength workouts and meal plans that adapt to your daily readiness and your cycle, with support for PCOS, perimenopause, thyroid, and GLP-1. Connects with Oura and Apple Health.">
 <link rel="canonical" href="https://attuneapp.io/">
@@ -16,13 +17,15 @@
 <meta property="og:url" content="https://attuneapp.io/">
 <meta property="og:title" content="Attune: Hormone Fitness for Women">
 <meta property="og:description" content="Strength workouts and meals that adapt to your daily readiness and your hormones. Support for PCOS, perimenopause, thyroid, and GLP-1. Connects with Oura and Apple Health.">
-<meta property="og:image" content="https://bnyaknuibngvikfktecq.supabase.co/storage/v1/object/public/Presentation%20photos/screen-home%20(1).png">
+<meta property="og:image" content="https://attuneapp.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Attune: Hormone Fitness for Women">
 <meta name="twitter:description" content="Workouts and meals that adapt to your readiness and your hormones. Support for PCOS, perimenopause, thyroid, and GLP-1.">
-<meta name="twitter:image" content="https://bnyaknuibngvikfktecq.supabase.co/storage/v1/object/public/Presentation%20photos/screen-home%20(1).png">
+<meta name="twitter:image" content="https://attuneapp.io/og-image.png">
 
 <!-- Structured data -->
 <script type="application/ld+json">
@@ -157,6 +160,36 @@ nav.scrolled {
   transition: opacity 0.2s !important;
 }
 .nav-cta:hover { opacity: 0.85; }
+
+/* Pricing card CTA */
+.price-cta {
+  display: block;
+  margin-top: 26px;
+  padding: 13px 20px;
+  border-radius: 26px;
+  border: 1px solid var(--pink);
+  color: var(--pink);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-align: center;
+  transition: background 0.25s, color 0.25s;
+}
+.price-cta:hover { background: var(--pink); color: #fff; }
+.price-card.featured .price-cta { background: var(--pink); color: #fff; }
+.price-card.featured .price-cta:hover { opacity: 0.85; }
+
+/* Disclaimer sitting with the condition claims */
+.claims-disclaimer {
+  margin: 40px auto 0;
+  max-width: 620px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+  opacity: 0.75;
+  text-align: center;
+}
 
 /* Sections */
 section { position: relative; }
@@ -814,7 +847,11 @@ footer {
 /* Responsive */
 @media (max-width: 900px) {
   nav { padding: 20px 24px; }
-  .nav-links { display: none; }
+  /* Hide the text links on mobile but never the Download pill: it was the only
+     route to the App Store from the header and there is no hamburger. */
+  .nav-links { gap: 0; }
+  .nav-links a:not(.nav-cta) { display: none; }
+  .nav-cta { padding: 9px 18px; font-size: 12px !important; }
   .hero-phones .phone-side { display: none; }
   .phone-center { width: 180px; height: 368px; }
   .pain-grid { grid-template-columns: 1fr; }
@@ -833,6 +870,7 @@ footer {
 .faq-q { font-family: 'Cormorant Garamond', serif; font-size: 26px; line-height: 1.3; color: var(--text); margin-bottom: 12px; }
 .faq-a { font-size: 16px; line-height: 1.75; color: var(--muted); }
 </style>
+<script src="/analytics.js" defer></script>
 </head>
 <body>
 
@@ -846,7 +884,7 @@ footer {
     <a href="#features">Features</a>
     <a href="#pricing">Pricing</a>
     <a href="/guides">Guides</a>
-    <a href="https://apps.apple.com/app/id6761509262" class="nav-cta" target="_blank">Download</a>
+    <a href="https://apps.apple.com/app/id6761509262" class="nav-cta" target="_blank" data-track-location="nav">Download</a>
   </div>
 </nav>
 
@@ -862,7 +900,7 @@ footer {
       Attune reads your daily readiness and your cycle, then builds the strength workouts and meals your body needs. <strong>Built in support for PCOS, perimenopause, thyroid, and GLP-1.</strong> Connects with Oura and Apple Health.
     </p>
     <div class="hero-actions">
-      <a href="https://apps.apple.com/app/id6761509262" class="btn-primary" target="_blank">
+      <a href="https://apps.apple.com/app/id6761509262" class="btn-primary" target="_blank" data-track-location="hero">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Download on App Store
       </a>
@@ -881,7 +919,7 @@ footer {
       <div class="phone phone-center">
         <div class="phone-island"></div>
         <div class="phone-screen">
-          <img src="https://bnyaknuibngvikfktecq.supabase.co/storage/v1/object/public/Presentation%20photos/screen-home%20(1).png" alt="Attune home screen with readiness score">
+          <img src="https://attuneapp.io/og-image.png" alt="Attune home screen with readiness score">
         </div>
         <div class="phone-glow"></div>
       </div>
@@ -999,7 +1037,7 @@ footer {
         <div class="feature-phone">
           <div class="phone-island"></div>
           <div class="phone-screen">
-            <img src="https://bnyaknuibngvikfktecq.supabase.co/storage/v1/object/public/Presentation%20photos/screen-home%20(1).png" alt="AI Coach">
+            <img src="https://attuneapp.io/og-image.png" alt="AI Coach">
           </div>
         </div>
       </div>
@@ -1105,6 +1143,7 @@ footer {
       <div class="condition-pill highlight">Endometriosis</div>
       <div class="condition-pill highlight">GLP-1 medication</div>
     </div>
+    <p class="claims-disclaimer reveal reveal-delay-4">Attune is a fitness and wellness app. It does not diagnose, treat, or provide medical advice. Always consult a qualified healthcare professional about your condition or medication.</p>
   </div>
 </section>
 
@@ -1158,7 +1197,7 @@ footer {
   <div class="pricing-inner">
     <span class="eyebrow reveal">Simple pricing</span>
     <h2 class="section-title reveal reveal-delay-1">Start free. <em>Stay when it works.</em></h2>
-    <p class="section-body reveal reveal-delay-2">14 day free trial. Cancel anytime. No hidden fees.</p>
+    <p class="section-body reveal reveal-delay-2">7 day free trial. Cancel anytime. No hidden fees.</p>
     <div class="pricing-grid">
       <div class="price-card reveal reveal-delay-1">
         <div class="price-name">Monthly</div>
@@ -1166,6 +1205,7 @@ footer {
         <div class="price-period">per month</div>
         <div class="price-divider"></div>
         <div class="price-desc">Full access to all features. Best for trying the app before committing long term.</div>
+        <a href="https://apps.apple.com/app/id6761509262" class="price-cta" target="_blank" data-track-location="pricing_monthly">Start free trial</a>
       </div>
       <div class="price-card featured reveal reveal-delay-2">
         <div class="price-name">Annual</div>
@@ -1173,6 +1213,7 @@ footer {
         <div class="price-period">per year, saves 50%</div>
         <div class="price-divider"></div>
         <div class="price-desc">The most committed women choose annual. Highest results, lowest cost. Less than $13 per month.</div>
+        <a href="https://apps.apple.com/app/id6761509262" class="price-cta" target="_blank" data-track-location="pricing_annual">Start free trial</a>
       </div>
       <div class="price-card reveal reveal-delay-3">
         <div class="price-name">Quarterly</div>
@@ -1180,6 +1221,7 @@ footer {
         <div class="price-period">per 3 months, saves 33%</div>
         <div class="price-divider"></div>
         <div class="price-desc">Perfect for committing to one full transformation programme before deciding long term.</div>
+        <a href="https://apps.apple.com/app/id6761509262" class="price-cta" target="_blank" data-track-location="pricing_quarterly">Start free trial</a>
       </div>
     </div>
   </div>
@@ -1218,7 +1260,7 @@ footer {
     <h2 class="cta-title reveal reveal-delay-1">Your hormones are<br>not the <em>problem.</em></h2>
     <p class="cta-sub reveal reveal-delay-2">They have just never had the right programme. Download Attune and train in a way that finally makes sense for your body.</p>
     <div class="reveal reveal-delay-3">
-      <a href="https://apps.apple.com/app/id6761509262" class="app-badge" target="_blank">
+      <a href="https://apps.apple.com/app/id6761509262" class="app-badge" target="_blank" data-track-location="final_cta">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         <div>
           <div class="app-badge-sub">DOWNLOAD ON THE</div>
@@ -1226,7 +1268,7 @@ footer {
         </div>
       </a>
     </div>
-    <p style="font-size:13px;color:var(--muted);margin-top:20px;" class="reveal reveal-delay-4">14 day free trial · Cancel anytime</p>
+    <p style="font-size:13px;color:var(--muted);margin-top:20px;" class="reveal reveal-delay-4">7 day free trial · Cancel anytime</p>
   </div>
 </section>
 
@@ -1238,6 +1280,7 @@ footer {
     <a href="#pricing">Pricing</a>
     <a href="/guides">Free guides</a>
     <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
     <a href="mailto:hello@attuneapp.io">Contact</a>
   </div>
   <div class="footer-copy">© 2026 Attune. All rights reserved.</div>

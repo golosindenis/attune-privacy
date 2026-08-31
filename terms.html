@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-itunes-app" content="app-id=6761509262">
+<title>Terms of Service — Attune</title>
+<meta name="description" content="Attune terms of service. Subscription, billing, cancellation, acceptable use, and the limits of what Attune is.">
+<link rel="canonical" href="https://attuneapp.io/terms.html">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #FF4D6A;
+  --gold: #C9A96E;
+  --bg: #07050A;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0EBF4;
+  --muted: #7A6E80;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+  background: rgba(7,5,10,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 5px;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--pink); }
+.nav-back {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--text); }
+
+.hero-bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255,77,106,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 140px 24px 100px;
+}
+
+.page-eyebrow {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--pink);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.page-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.page-title em { font-style: italic; color: var(--pink); }
+
+.page-meta {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 60px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section {
+  margin-bottom: 48px;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 14px;
+  padding-top: 8px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+
+p strong { color: var(--text); font-weight: 400; }
+
+ul {
+  list-style: none;
+  margin-bottom: 14px;
+}
+
+ul li {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--muted);
+  font-weight: 300;
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--pink);
+  opacity: 0.5;
+}
+
+a {
+  color: var(--pink);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+.highlight-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 14px;
+}
+.highlight-box p { margin-bottom: 0; }
+
+footer {
+  padding: 48px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 4px;
+  color: var(--text);
+  opacity: 0.6;
+  text-decoration: none;
+}
+.footer-logo span { color: var(--pink); }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); }
+.footer-copy { font-size: 12px; color: var(--muted); opacity: 0.5; }
+
+@media (max-width: 768px) {
+  nav { padding: 20px 24px; }
+  .container { padding: 120px 20px 80px; }
+  footer { flex-direction: column; align-items: flex-start; padding: 36px 24px; }
+}
+</style>
+<script src="/analytics.js" defer></script>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+
+<nav>
+  <a href="/" class="nav-logo">ATT<span>U</span>NE</a>
+  <a href="/" class="nav-back">&larr; Back to home</a>
+</nav>
+
+<div class="container">
+
+  <span class="page-eyebrow">Legal</span>
+  <h1 class="page-title">Terms of <em>Service</em></h1>
+  <p class="page-meta">Last updated: August 2026 &nbsp;&middot;&nbsp; Attune</p>
+
+  <div class="section">
+    <div class="highlight-box">
+      <p><strong>Attune is a fitness and wellness app, not a medical service.</strong> Nothing in the app, on this website, or in any message from a coach persona is medical advice, diagnosis, or treatment. Always consult a qualified healthcare professional before changing how you train, eat, or take any medication, including GLP-1 medication.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>1. Agreement</h2>
+    <p>These terms are between you and Attune. By creating an account or using the app you accept them. If you do not accept them, do not use Attune.</p>
+  </div>
+
+  <div class="section">
+    <h2>2. Who can use Attune</h2>
+    <p>You must be 18 or older to use Attune. The app is built for women managing hormonal health conditions, and the guidance it produces assumes an adult user.</p>
+  </div>
+
+  <div class="section">
+    <h2>3. What Attune is, and what it is not</h2>
+    <p>Attune generates strength training programmes, nutrition targets, and wellness guidance that adapt to information you give it, including your daily check in, your cycle, connected wearable data, and any conditions you declare such as PCOS, perimenopause, thyroid conditions, endometriosis, or GLP-1 medication use.</p>
+    <p>That guidance is general fitness and wellness information. It is not a diagnosis, not a treatment plan, and not a substitute for care from a doctor, dietitian, or other qualified professional. Attune does not adjust, prescribe, or advise on any medication. If you are pregnant, postpartum, recovering from injury or surgery, or being treated for any condition, get clearance from your own clinician before following anything the app suggests.</p>
+    <p>Blood work features present information about markers you upload. They do not diagnose anything and are not a lab report. Discuss any result with the clinician who ordered it.</p>
+  </div>
+
+  <div class="section">
+    <h2>4. Subscriptions and billing</h2>
+    <p>Attune is sold as an auto renewing subscription through the Apple App Store. Monthly, quarterly, and annual plans are available, and new subscribers get a free trial as stated on the App Store listing at the time of purchase.</p>
+    <p>Payment is charged to your Apple ID at confirmation of purchase. Your subscription renews automatically unless you turn off auto renew at least 24 hours before the end of the current period. Your Apple ID is charged for renewal within 24 hours before the period ends.</p>
+    <p>You manage and cancel your subscription in your Apple ID settings, not inside Attune. Cancelling stops future renewals and leaves your access running to the end of the period you already paid for. Any unused part of a free trial is forfeited when you buy a subscription.</p>
+    <p>Refunds are handled by Apple under Apple's own policy. Attune cannot issue refunds for App Store purchases. Request one at reportaproblem.apple.com.</p>
+    <p>Prices may change. Any change applies from your next renewal, never retroactively, and you will be told before it takes effect.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. Your account</h2>
+    <p>You are responsible for your account and for the accuracy of what you tell the app. Attune adapts to the height, weight, conditions, and answers you enter, so wrong information produces wrong guidance. Do not share your account. Tell us at hello@attuneapp.io if you believe it has been used without your permission.</p>
+    <p>You can delete your account and its data from inside the app at any time.</p>
+  </div>
+
+  <div class="section">
+    <h2>6. Acceptable use</h2>
+    <p>Do not reverse engineer, scrape, resell, or copy the app or its generated content. Do not use Attune to harass anyone in the community features, or to post content that is unlawful, abusive, or medically dangerous. We may suspend an account that does.</p>
+  </div>
+
+  <div class="section">
+    <h2>7. Your content</h2>
+    <p>You keep ownership of what you put into Attune, including your check ins, photos, and messages. You grant us the permission needed to store and process it in order to run the service for you. We handle it as described in our <a href="privacy.html" style="color:var(--pink);">Privacy Policy</a>.</p>
+  </div>
+
+  <div class="section">
+    <h2>8. Third party services</h2>
+    <p>Attune connects to services including Apple Health, Health Connect, Oura, and WHOOP when you choose to link them, and uses third party providers for nutrition data and infrastructure. Their availability and accuracy are outside our control. Linking or unlinking any of them is your choice and can be undone in the app.</p>
+  </div>
+
+  <div class="section">
+    <h2>9. Availability</h2>
+    <p>We aim to keep Attune running but do not guarantee uninterrupted service. Features may change, and we may add, alter, or withdraw them.</p>
+  </div>
+
+  <div class="section">
+    <h2>10. Limitation of liability</h2>
+    <p>To the fullest extent the law allows, Attune is not liable for injury, illness, or loss arising from following guidance produced by the app, from inaccurate data supplied by you or by a connected device, or from any interruption of the service. You train at your own risk. Stop immediately and seek medical attention if you feel unwell during any activity.</p>
+    <p>Nothing here limits any liability that cannot lawfully be limited.</p>
+  </div>
+
+  <div class="section">
+    <h2>11. Changes to these terms</h2>
+    <p>We may update these terms. The date at the top shows the current version, and continued use after a change means you accept it.</p>
+  </div>
+
+  <div class="section">
+    <h2>12. Governing law</h2>
+    <p>These terms are governed by the laws of the United Arab Emirates, and the courts of Dubai have exclusive jurisdiction, without affecting any consumer rights you hold where you live.</p>
+  </div>
+
+  <div class="section">
+    <h2>13. Contact</h2>
+    <p>Questions about these terms: <a href="mailto:hello@attuneapp.io" style="color:var(--pink);">hello@attuneapp.io</a></p>
+  </div>
+
+</div>
+
+</body>
+</html>
