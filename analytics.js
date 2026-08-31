@@ -1,10 +1,10 @@
 /* Attune marketing site analytics.
-   ONE THING TO DO: replace G-XXXXXXXXXX below with the real GA4 Measurement ID
+   ONE THING TO DO: replace G-Q99S3428FN below with the real GA4 Measurement ID
    (GA4 admin > Data streams > your web stream > Measurement ID).
    Until then every call below is a silent no op, so nothing breaks and no
    half configured data is collected. */
 (function () {
-  var MEASUREMENT_ID = 'G-XXXXXXXXXX';
+  var MEASUREMENT_ID = 'G-Q99S3428FN';
   var CONFIGURED = MEASUREMENT_ID.indexOf('X') === -1;
 
   window.dataLayer = window.dataLayer || [];
