@@ -42,20 +42,37 @@
       });
     }, true);
 
-    /* view_pricing: fires once, when the pricing block is actually seen. */
+    /* view_pricing: fires once, when the pricing block is actually seen.
+       Deliberately threshold 0 with a bottom rootMargin rather than a
+       percentage of the element. The pricing section stacks to ~1614px on a
+       phone, so on a 667px screen no more than 41% of it can ever be on
+       screen at once and a 0.4 threshold would essentially never fire. This
+       version triggers when the section reaches the lower quarter of the
+       viewport, which is height independent. */
     var pricing = document.getElementById('pricing');
+    var seen = false;
+    function markPricingSeen() {
+      if (seen) return;
+      seen = true;
+      window.attuneTrack('view_pricing', { page: window.location.pathname });
+    }
     if (pricing && 'IntersectionObserver' in window) {
-      var seen = false;
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
-          if (en.isIntersecting && !seen) {
-            seen = true;
-            window.attuneTrack('view_pricing', { page: window.location.pathname });
-            io.disconnect();
-          }
+          if (en.isIntersecting) { markPricingSeen(); io.disconnect(); }
         });
-      }, { threshold: 0.4 });
+      }, { threshold: 0, rootMargin: '0px 0px -25% 0px' });
       io.observe(pricing);
+    } else if (pricing) {
+      /* Fallback for anything without IntersectionObserver. */
+      var onScroll = function () {
+        if (pricing.getBoundingClientRect().top < window.innerHeight * 0.75) {
+          markPricingSeen();
+          window.removeEventListener('scroll', onScroll);
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
     }
 
     /* coach_book: any route into the coach funnel. */
