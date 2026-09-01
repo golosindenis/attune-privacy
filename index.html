@@ -660,6 +660,7 @@ section { position: relative; }
   color: var(--text);
   margin-bottom: 32px;
 }
+.quote-stars { color: var(--pink); letter-spacing: 4px; font-size: 15px; margin-bottom: 14px; }
 .quote-attr { font-size: 13px; color: var(--muted); letter-spacing: 1px; }
 
 /* PRICING */
@@ -1153,8 +1154,9 @@ footer {
 <section class="testimonial">
   <div class="testimonial-inner reveal">
     <div class="quote-mark">"</div>
-    <p class="quote-text">For the first time in years I feel like my fitness programme is working with my body instead of fighting it. The fact that it knows I have PCOS and adapts everything around that. No other app has ever done that.</p>
-    <div class="quote-attr">EARLY ATTUNE USER, DUBAI</div>
+    <p class="quote-text">I have tried so many fitness apps but none of them accounted for where I am in my cycle or how I actually feel that day. Attune asks how I sleep, my energy, my stress and then adjusts my workout accordingly. The meal plan is personalised too. As someone with PCOS this finally feels like it was built for me.</p>
+    <div class="quote-stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <div class="quote-attr">DAISY &middot; VERIFIED APP STORE REVIEW</div>
   </div>
 </section>
 
@@ -1162,8 +1164,9 @@ footer {
 
 <!-- GUIDES -->
 <!-- Sits before pricing on purpose: give the answers away, then ask for money.
-     Also the only route to /guides that survives on mobile, where .nav-links is
-     display:none below 900px and the header has no links at all. -->
+     Also the only route to /guides that survives on mobile: below 900px the
+     header keeps the Download pill but hides every text link, so nothing else
+     points at /guides on a phone. -->
 <section class="guides-home" id="guides">
   <div class="guides-home-inner">
     <span class="eyebrow reveal">Free guides</span>
